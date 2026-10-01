@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LazyHand</title>
+<meta name="description" content="LazyHand automates the work your team repeats every day. Built and used daily by a real LA business. Free consultation.">
+<meta property="og:title" content="LazyHand — Automate the work your team repeats every day">
+<meta property="og:description" content="Invoices, inventory, reports, line sheets, auto-printing and custom automation. Free consultation.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f5eff'/><text x='32' y='44' font-size='34' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>L</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#16181d; --muted:#5d6370; --line:#e3e1da;
+  --accent:#1f5eff; --accent-ink:#ffffff; --soft:#eaf0ff; --ok:#137a3f; --err:#c0392b;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121317; --card:#1b1d23; --ink:#eef0f4; --muted:#a3a9b6; --line:#2c2f37;
+    --accent:#5b8cff; --accent-ink:#0b0d12; --soft:#1e2740; --ok:#4cc38a; --err:#ff7a6b;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121317; --card:#1b1d23; --ink:#eef0f4; --muted:#a3a9b6; --line:#2c2f37;
+  --accent:#5b8cff; --accent-ink:#0b0d12; --soft:#1e2740; --ok:#4cc38a; --err:#ff7a6b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans KR",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+html[lang="ko"] body{font-family:"Noto Sans KR",Inter,system-ui,sans-serif}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.logo i{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-style:normal;font-size:18px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.lang button{width:auto;border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;padding:6px 14px;cursor:pointer;border-radius:0}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+header{padding:32px 0 28px}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);background:var(--soft);padding:4px 12px;border-radius:999px;margin-bottom:16px}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.2;font-weight:900;margin:0 0 16px;letter-spacing:-.025em}
+.lead{font-size:18px;color:var(--muted);margin:0;max-width:620px}
+.cta{display:inline-block;margin-top:24px;background:var(--accent);color:var(--accent-ink);font-weight:700;padding:14px 24px;border-radius:12px;text-decoration:none}
+section{padding:24px 0}
+h2{font-size:22px;margin:0 0 16px;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.item b{display:block;font-size:16px;margin-bottom:4px}
+.item span{color:var(--muted);font-size:14px}
+.item.custom{border-style:dashed;border-color:var(--accent);background:var(--soft)}
+.trust{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.trust ul{margin:0;padding-left:20px}
+.trust li{margin:6px 0}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;counter-increment:s}
+.step::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;margin-bottom:8px}
+.step b{display:block}
+.step span{color:var(--muted);font-size:14px}
+form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+@media (max-width:560px){form{padding:18px}}
+fieldset{border:0;padding:0;margin:0 0 24px;min-width:0}
+legend{font-weight:700;font-size:16px;margin-bottom:10px;padding:0}
+label.f{display:block;font-size:14px;font-weight:500;margin:12px 0 6px}
+.req{color:var(--err)}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.row{grid-template-columns:1fr;gap:0}}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:560px){.checks{grid-template-columns:1fr}}
+.checks label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:15px}
+.checks input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent);flex:none}
+.checks label:has(input:checked){border-color:var(--accent);background:var(--soft)}
+.submit{width:100%;font:inherit;font-size:17px;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:16px;cursor:pointer}
+.submit:disabled{opacity:.6;cursor:wait}
+.msg{margin-top:14px;font-weight:500;display:none}
+.msg.ok{display:block;color:var(--ok)}
+.msg.err{display:block;color:var(--err)}
+.hp{position:absolute;left:-9999px}
+footer{padding:32px 0 48px;color:var(--muted);font-size:13px;text-align:center}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#"><i>L</i>LazyHand</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en">EN</button>
+      <button type="button" data-set-lang="ko">한국어</button>
+    </div>
+  </nav>
+
+  <header>
+    <span class="tag" data-i="tag"></span>
+    <h1 data-i="h1"></h1>
+    <p class="lead" data-i="lead"></p>
+    <a class="cta" href="#apply" data-i="cta"></a>
+  </header>
+
+  <section>
+    <h2 data-i="whatH"></h2>
+    <div class="grid">
+      <div class="item"><b data-i="w1t"></b><span data-i="w1d"></span></div>
+      <div class="item"><b data-i="w2t"></b><span data-i="w2d"></span></div>
+      <div class="item"><b data-i="w3t"></b><span data-i="w3d"></span></div>
+      <div class="item"><b data-i="w4t"></b><span data-i="w4d"></span></div>
+      <div class="item"><b data-i="w5t"></b><span data-i="w5d"></span></div>
+      <div class="item"><b data-i="w6t"></b><span data-i="w6d"></span></div>
+      <div class="item"><b data-i="w7t"></b><span data-i="w7d"></span></div>
+      <div class="item"><b data-i="w8t"></b><span data-i="w8d"></span></div>
+      <div class="item"><b data-i="w9t"></b><span data-i="w9d"></span></div>
+      <div class="item custom"><b data-i="w10t"></b><span data-i="w10d"></span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="trust">
+      <h2 data-i="trustH"></h2>
+      <ul>
+        <li data-i="t1"></li>
+        <li data-i="t2"></li>
+        <li data-i="t3"></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-i="howH"></h2>
+    <div class="steps">
+      <div class="step"><b data-i="s1t"></b><span data-i="s1d"></span></div>
+      <div class="step"><b data-i="s2t"></b><span data-i="s2d"></span></div>
+      <div class="step"><b data-i="s3t"></b><span data-i="s3d"></span></div>
+      <div class="step"><b data-i="s4t"></b><span data-i="s4d"></span></div>
+    </div>
+  </section>
+
+  <section id="apply">
+    <h2 data-i="formH"></h2>
+    <form id="f" novalidate>
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <fieldset>
+        <legend data-i="l1"></legend>
+        <div class="row">
+          <div><label class="f" for="company"><span data-i="company"></span> <span class="req">*</span></label><input id="company" name="Company" type="text" autocomplete="organization" required></div>
+          <div><label class="f" for="name"><span data-i="name"></span> <span class="req">*</span></label><input id="name" name="Name" type="text" autocomplete="name" required></div>
+        </div>
+        <div class="row">
+          <div><label class="f" for="phone"><span data-i="phone"></span> <span class="req">*</span></label><input id="phone" name="Phone" type="tel" autocomplete="tel" required></div>
+          <div><label class="f" for="email" data-i="email"></label><input id="email" name="email" type="email" autocomplete="email"></div>
+        </div>
+        <div class="row">
+          <div><label class="f" for="industry" data-i="industry"></label>
+            <select id="industry" name="Industry" data-opts="industryOpts"></select></div>
+          <div><label class="f" for="size" data-i="size"></label>
+            <select id="size" name="Team size" data-opts="sizeOpts"></select></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-i="l2"></legend>
+        <div class="checks" data-checks="needs" data-name="Needs"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-i="l3"></legend>
+        <div class="checks" data-checks="tools" data-name="Software used"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend data-i="l4"></legend>
+        <label class="f" for="task" data-i="task"></label>
+        <textarea id="task" name="Repetitive work" data-ph="taskPh"></textarea>
+        <div class="row">
+          <div><label class="f" for="hours" data-i="hours"></label>
+            <select id="hours" name="Hours per day" data-opts="hoursOpts"></select></div>
+          <div><label class="f" for="contact" data-i="contact"></label>
+            <select id="contact" name="Preferred contact" data-opts="contactOpts"></select></div>
+        </div>
+      </fieldset>
+
+      <button class="submit" id="btn" type="submit" data-i="submit"></button>
+      <p id="msg" class="msg" role="status"></p>
+    </form>
+  </section>
+
+  <footer>© LazyHand · <a id="mail" href="#"></a></footer>
+</div>
+
+<script>
+const CONTACT_EMAIL = 'lazyhandla@gmail.com';
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACT_EMAIL;
+
+// Option values are sent in English so every lead email reads the same.
+const NEEDS = [
+  ['Invoices & shipping labels', '인보이스 · 배송라벨 처리', 'Invoices & shipping labels'],
+  ['Inventory sync', '재고 맞추기 (웹사이트 · 판매채널)', 'Inventory sync (website & sales channels)'],
+  ['Order entry', '주문 입력 · 정리', 'Order entry'],
+  ['Excel & PDF work', '엑셀 · PDF 작업', 'Excel & PDF work'],
+  ['Line sheets', '라인싯 · 카탈로그 제작', 'Line sheets & catalogs'],
+  ['Auto printing', '자동 프린트 (인보이스 · 픽티켓 · 라벨)', 'Auto printing (invoices, pick tickets, labels)'],
+  ['Commission & month-end', '커미션 · 월말 계산', 'Commissions & month-end'],
+  ['Shipping bill audit', '배송비 청구서 점검 (UPS · FedEx)', 'Shipping bill audit (UPS / FedEx)'],
+  ['Reports', '엑셀 리포트 자동 작성', 'Automatic reports'],
+  ['Customer emails & texts', '손님 이메일 · 문자 자동 발송', 'Customer emails & texts'],
+  ['Job post reposting', '구인광고 자동 재등록', 'Job post auto-reposting'],
+  ['Product listing', '온라인 상품 등록', 'Online product listing'],
+  ['Custom', '커스텀 작업 (아래에 적어주세요)', 'Custom work (describe below)'],
+];
+const TOOLS = [
+  ['Excel / Google Sheets', 'Excel · 구글시트', 'Excel / Google Sheets'],
+  ['QuickBooks', 'QuickBooks', 'QuickBooks'],
+  ['N41', 'N41', 'N41'],
+  ['Shopify', 'Shopify', 'Shopify'],
+  ['Faire', 'Faire', 'Faire'],
+  ['FashionGo', 'FashionGo', 'FashionGo'],
+  ['UPS / FedEx', 'UPS · FedEx', 'UPS / FedEx'],
+  ['Other', '기타', 'Other'],
+];
+
+const T = {
+  en: {
+    tag: 'Free consultation',
+    h1: 'Your team repeats the same work every day.<br>Let LazyHand do it.',
+    lead: 'We run a real business in Los Angeles. Every automation we offer is one we built for ourselves and use every day. If it doesn’t run for us, we don’t sell it.',
+    cta: 'Get a free consultation →',
+    whatH: 'What we automate',
+    w1t: 'Invoices & shipping labels', w1d: 'Hours of daily processing, done in one click',
+    w2t: 'Inventory sync', w2d: 'Website and sales-channel stock that stays correct on its own',
+    w3t: 'Excel & PDF work', w3d: 'Clean up spreadsheets, merge and generate PDFs automatically',
+    w4t: 'Line sheets', w4d: 'Product photos and prices turned into a ready-to-send line sheet PDF',
+    w5t: 'Auto printing', w5d: 'Invoices, pick tickets and labels print by themselves',
+    w6t: 'Commissions & month-end', w6d: 'Calculated every month and emailed to you',
+    w7t: 'Shipping bill audit', w7d: 'Find UPS / FedEx overcharges and correction fees',
+    w8t: 'Reports & alerts', w8d: 'The numbers you check every day, delivered automatically',
+    w9t: 'Job post reposting', w9d: 'Your hiring ad goes back to the top every hour',
+    w10t: 'Custom work', w10d: 'Something only your business does? Tell us and we’ll build it.',
+    trustH: 'Why LazyHand',
+    t1: 'We are not a software agency. We built these tools <b>because we needed them</b> in our own business.',
+    t2: 'They are <b>running right now</b>, every day, on real orders.',
+    t3: 'Free consultation first. We only promise what we know works.',
+    howH: 'How it works',
+    s1t: 'Free consultation', s1d: 'Tell us what your team repeats',
+    s2t: 'Quote', s2d: 'A clear price and scope, in writing',
+    s3t: 'Build & test', s3d: 'We test on one real case before going live',
+    s4t: 'Hand-off & support', s4d: 'Warranty period included',
+    formH: 'Free consultation request',
+    l1: '1. Contact', company: 'Company', name: 'Your name', phone: 'Phone', email: 'Email',
+    industry: 'Industry', size: 'Team size',
+    industryOpts: [['', 'Select'], ['Apparel wholesale', 'Apparel / fashion wholesale'], ['Apparel retail / e-commerce', 'Apparel retail / online store'], ['Restaurant / food', 'Restaurant / food'], ['Market / distribution', 'Market / distribution'], ['Logistics / trade', 'Logistics / import-export'], ['Office / professional services', 'Office / professional services'], ['Other', 'Other']],
+    sizeOpts: [['', 'Select'], ['1-5', '1–5'], ['6-20', '6–20'], ['21-50', '21–50'], ['50+', '50+']],
+    l2: '2. What would you like to automate? (select all that apply)',
+    l3: '3. Software you use',
+    l4: '4. Tell us more',
+    task: 'What does your team repeat every day or every week?',
+    taskPh: 'e.g. Every morning we copy orders from Excel into our system. It takes 2 hours.',
+    hours: 'Time spent on it per day', contact: 'Best way to reach you',
+    hoursOpts: [['', 'Select'], ['<1h', 'Under 1 hour'], ['1-3h', '1–3 hours'], ['3-5h', '3–5 hours'], ['5h+', '5+ hours']],
+    contactOpts: [['Phone', 'Phone call'], ['Text', 'Text message'], ['Email', 'Email'], ['KakaoTalk', 'KakaoTalk']],
+    submit: 'Request free consultation',
+    sending: 'Sending…',
+    required: 'Please fill in company, name and phone.',
+    ok: 'Thank you! We received your request and will contact you within one business day.',
+    fail: 'Something went wrong. Please email us directly at ' + CONTACT_EMAIL + '.',
+  },
+  ko: {
+    tag: '무료 상담',
+    h1: '직원이 매일 반복하는 일,<br>레이지핸드가 대신합니다.',
+    lead: '저희는 LA에서 실제 회사를 운영하고 있습니다. 직접 필요해서 만들고 매일 쓰고 있는 자동화만 해드립니다. 우리 회사에서 안 돌아가는 건 팔지 않습니다.',
+    cta: '무료 상담 신청하기 →',
+    whatH: '이런 일, 자동으로 됩니다',
+    w1t: '인보이스 · 배송라벨', w1d: '매일 몇 시간 걸리던 처리를 클릭 한 번으로',
+    w2t: '재고 자동 맞춤', w2d: '웹사이트 · 판매채널 재고를 직원이 손으로 안 맞춰도',
+    w3t: '엑셀 · PDF 작업', w3d: '엑셀 정리, PDF 합치기 · 자동 작성',
+    w4t: '라인싯 제작', w4d: '상품 사진과 가격으로 바로 보낼 수 있는 라인싯 PDF',
+    w5t: '자동 프린트', w5d: '인보이스 · 픽티켓 · 라벨이 알아서 출력',
+    w6t: '커미션 · 월말 계산', w6d: '매달 자동 계산, 결과는 이메일로',
+    w7t: '배송비 청구서 점검', w7d: 'UPS · FedEx가 더 걷어간 배송비와 보정 수수료를 찾아냅니다',
+    w8t: '리포트 · 알림', w8d: '매일 보던 숫자를 정리해서 자동으로 보내드립니다',
+    w9t: '구인광고 자동 재등록', w9d: '공고가 매시간 자동으로 다시 올라갑니다',
+    w10t: '커스텀 작업', w10d: '우리 회사만의 일도 말씀해 주세요. 맞춤으로 만들어 드립니다.',
+    trustH: '왜 레이지핸드인가요?',
+    t1: '개발 회사가 아니라, <b>직접 회사를 운영하면서 필요해서</b> 만든 자동화입니다.',
+    t2: '지금 이 순간에도 실제 주문으로 <b>매일 돌아가고</b> 있습니다.',
+    t3: '먼저 무료로 상담하고, 확실히 되는 것만 약속드립니다.',
+    howH: '진행 순서',
+    s1t: '무료 상담', s1d: '반복하는 일을 알려주세요',
+    s2t: '견적', s2d: '가격과 작업 범위를 문서로',
+    s3t: '제작 · 테스트', s3d: '실제 1건으로 먼저 확인',
+    s4t: '인도 · 지원', s4d: '보증 기간 포함',
+    formH: '무료 상담 신청',
+    l1: '1. 연락처', company: '회사명', name: '담당자 성함', phone: '전화번호', email: '이메일',
+    industry: '업종', size: '직원 수',
+    industryOpts: [['', '선택해 주세요'], ['Apparel wholesale', '의류 · 패션 도매'], ['Apparel retail / e-commerce', '의류 · 패션 소매 / 온라인몰'], ['Restaurant / food', '식당 · 식품'], ['Market / distribution', '마켓 · 유통'], ['Logistics / trade', '물류 · 무역'], ['Office / professional services', '사무실 · 전문서비스'], ['Other', '기타']],
+    sizeOpts: [['', '선택해 주세요'], ['1-5', '1~5명'], ['6-20', '6~20명'], ['21-50', '21~50명'], ['50+', '50명 이상']],
+    l2: '2. 자동화하고 싶은 일 (여러 개 선택 가능)',
+    l3: '3. 지금 사용하는 프로그램',
+    l4: '4. 자세히 알려주세요',
+    task: '매일 · 매주 반복하는 일이 무엇인가요?',
+    taskPh: '예) 매일 아침 주문을 엑셀에서 프로그램으로 옮겨 적는데 2시간 걸립니다',
+    hours: '그 일에 쓰는 시간 (하루 기준)', contact: '편한 연락 방법',
+    hoursOpts: [['', '선택해 주세요'], ['<1h', '1시간 미만'], ['1-3h', '1~3시간'], ['3-5h', '3~5시간'], ['5h+', '5시간 이상']],
+    contactOpts: [['Phone', '전화'], ['Text', '문자'], ['Email', '이메일'], ['KakaoTalk', '카카오톡']],
+    submit: '무료 상담 신청하기',
+    sending: '보내는 중…',
+    required: '회사명, 담당자 성함, 전화번호는 꼭 적어주세요.',
+    ok: '신청이 접수되었습니다. 영업일 1일 안에 연락드리겠습니다. 감사합니다!',
+    fail: '전송에 실패했습니다. ' + CONTACT_EMAIL + ' 으로 직접 연락 부탁드립니다.',
+  }
+};
+
+let lang = 'en';
+
+function buildChecks(el, list) {
+  const keep = new Set([...el.querySelectorAll('input:checked')].map(i => i.value));
+  const name = el.dataset.name;
+  el.innerHTML = '';
+  for (const [value, ko, en] of list) {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = 'checkbox'; input.name = name; input.value = value; input.checked = keep.has(value);
+    label.append(input, document.createTextNode(lang === 'ko' ? ko : en));
+    el.append(label);
+  }
+}
+
+function buildSelect(el, opts) {
+  const keep = el.value;
+  el.innerHTML = '';
+  for (const [value, text] of opts) {
+    const o = document.createElement('option'); o.value = value; o.textContent = text; el.append(o);
+  }
+  el.value = keep;
+  if (el.selectedIndex < 0) el.selectedIndex = 0;
+}
+
+function setLang(next) {
+  lang = next;
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i]').forEach(el => { el.innerHTML = t[el.dataset.i]; });
+  document.querySelectorAll('[data-opts]').forEach(el => buildSelect(el, t[el.dataset.opts]));
+  document.querySelectorAll('[data-ph]').forEach(el => { el.placeholder = t[el.dataset.ph]; });
+  buildChecks(document.querySelector('[data-checks="needs"]'), NEEDS);
+  buildChecks(document.querySelector('[data-checks="tools"]'), TOOLS);
+  document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)));
+  document.getElementById('msg').className = 'msg';
+  try { localStorage.setItem('lh-lang', lang); } catch (e) {}
+}
+
+document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+
+const mail = document.getElementById('mail');
+mail.textContent = CONTACT_EMAIL; mail.href = 'mailto:' + CONTACT_EMAIL;
+
+let initial = (new URLSearchParams(location.search).get('lang')) || '';
+if (!initial) { try { initial = localStorage.getItem('lh-lang') || ''; } catch (e) {} }
+if (!T[initial]) initial = (navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en';
+setLang(initial);
+
+const f = document.getElementById('f'), btn = document.getElementById('btn'), msg = document.getElementById('msg');
+f.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const t = T[lang];
+  msg.className = 'msg';
+  for (const id of ['company', 'name', 'phone']) {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { msg.textContent = t.required; msg.className = 'msg err'; el.focus(); return; }
+  }
+  const fd = new FormData(f);
+  if (fd.get('_honey')) return;
+  const data = {};
+  for (const [k, v] of fd.entries()) {
+    if (k === '_honey' || v === '') continue;
+    data[k] = data[k] ? data[k] + ', ' + v : v;
+  }
+  data['Language'] = lang === 'ko' ? 'Korean' : 'English';
+  data._subject = '[LazyHand lead] ' + data['Company'] + ' / ' + data['Name'];
+  data._template = 'table';
+  data._captcha = 'false';
+  btn.disabled = true; btn.textContent = t.sending;
+  try {
+    const r = await fetch(FORM_ENDPOINT, {
+      method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || String(j.success) === 'false') throw new Error(j.message || r.status);
+    f.reset();
+    msg.textContent = t.ok; msg.className = 'msg ok';
+  } catch (err) {
+    msg.textContent = t.fail; msg.className = 'msg err';
+  } finally {
+    btn.disabled = false; btn.textContent = t.submit;
+  }
+});
+</script>
+</body>
+</html>
