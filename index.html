@@ -4,15 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LazyHand 자동화</title>
-<meta name="description" content="매일 반복하는 일, 이제 자동으로. 주문·재고·엑셀 같은 반복 업무를 회사에 맞는 자동화 프로그램으로 만들어드립니다. 무료 상담, 온라인으로만 진행.">
+<meta name="description" content="매일 반복하는 일, 이제 자동으로. 주문·재고·엑셀 같은 반복 업무를 회사에 맞는 자동화 프로그램으로 만들어드려요. 무료 상담, 온라인으로만 진행해요.">
 <meta property="og:title" content="LazyHand — 매일 반복하는 일, 이제 자동으로.">
-<meta property="og:description" content="회사에 맞는 자동화 프로그램 제작. LA 의류 도매 현장에서 실제 운영 중인 사례. 무료 상담, 온라인으로만 진행.">
+<meta property="og:description" content="회사에 맞는 자동화 프로그램 제작. LA 의류 도매 회사를 운영하는 사람이 직접 만들어 쓰는 자동화. 무료 상담, 온라인으로만 진행해요.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text x='32' y='54' font-size='62' font-family='Arial' font-weight='900' fill='%230071e3' text-anchor='middle'>L</text></svg>">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
 /* Hallmark · macrostructure: Problem/Solution → Case File · tone: utilitarian-Apple (owner-specified) · anchor hue: blue 250
  * nav: N1a-thin (3 destinations) · footer: Ft2 inline · enrichment: none (typography + one interactive mock)
+ * v5: real redacted screenshots in case cards + free-tool section · haeyo-che copy · founder story
  * pre-emit critique: P4 H4 E4 S5 R4 V3 */
 :root{
   --bg:#ffffff; --alt:#f5f5f7; --ink:#1d1d1f; --ink2:#333336; --muted:#515154; --faint:#86868b; --line:#d2d2d7; --hair:#e8e8ed;
@@ -22,6 +23,7 @@
   --art:#6e6e73; --art-soft:#aeaeb2; --art-paper:#ffffff;
   --win:#f3f3f3; --win-bar:#ebebeb; --win-field:#ffffff; --win-line:#d6d6d6; --win-ad:#f7f7f9;
   --logo-tile:#ffffff;
+  --shot-paper:#ffffff; --shot-line:rgba(0,0,0,.08); --shot-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 30px rgba(0,0,0,.08);
   --shadow:0 2px 6px rgba(0,0,0,.06),0 24px 60px rgba(0,0,0,.14);
 }
 @media (prefers-color-scheme: dark){
@@ -33,6 +35,7 @@
     --art:#aeaeb2; --art-soft:#636366; --art-paper:#000000;
     --win:#202020; --win-bar:#2b2b2b; --win-field:#2d2d2d; --win-line:#3d3d3d; --win-ad:#262628;
     --logo-tile:#ebebf0;
+    --shot-paper:#ffffff; --shot-line:rgba(255,255,255,.14); --shot-shadow:0 10px 30px rgba(0,0,0,.6);
     --shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.7);
   }
 }
@@ -44,6 +47,7 @@
   --art:#aeaeb2; --art-soft:#636366; --art-paper:#000000;
   --win:#202020; --win-bar:#2b2b2b; --win-field:#2d2d2d; --win-line:#3d3d3d; --win-ad:#262628;
   --logo-tile:#ebebf0;
+  --shot-paper:#ffffff; --shot-line:rgba(255,255,255,.14); --shot-shadow:0 10px 30px rgba(0,0,0,.6);
   --shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.7);
 }
 
@@ -85,7 +89,7 @@ section.tight{padding:76px 0}
 h1,h2{margin:0;font-weight:700;letter-spacing:-.035em;line-height:1.12;white-space:nowrap}
 h1{font-size:clamp(25px,6.4vw,68px)}
 h2{font-size:clamp(23px,5.9vw,52px)}
-.lead{font-size:clamp(18px,2.1vw,21px);line-height:1.5;color:var(--ink2);margin:16px auto 0;max-width:660px;font-weight:450;letter-spacing:-.015em}
+.lead{text-wrap:balance;font-size:clamp(18px,2.1vw,21px);line-height:1.5;color:var(--ink2);margin:16px auto 0;max-width:660px;font-weight:450;letter-spacing:-.015em}
 .inv .lead{color:var(--inv-muted)}
 .head{margin-bottom:52px}
 @media (max-width:734px){.head{margin-bottom:36px}}
@@ -103,6 +107,7 @@ h2{font-size:clamp(23px,5.9vw,52px)}
 /* hero */
 .hero{padding:104px 0 96px;text-align:center}
 .hero .lead{font-size:clamp(19px,2.4vw,24px);max-width:720px;color:var(--ink2);margin-top:22px}
+.hero-origin{text-wrap:balance;margin:20px auto 0;max-width:640px;color:var(--muted);font-size:clamp(16px,1.7vw,18px);line-height:1.55}
 .hero-meta{margin:26px 0 0;color:var(--muted);font-size:15px;white-space:nowrap}
 @media (max-width:734px){.hero{padding:64px 0 60px}.hero-meta{font-size:14px}}
 
@@ -193,24 +198,44 @@ h2{font-size:clamp(23px,5.9vw,52px)}
 .case .tag{font-size:15px;font-weight:600;color:var(--muted);white-space:nowrap}
 .case .fig{margin:12px 0 2px;font-size:clamp(40px,4.4vw,52px);font-weight:700;letter-spacing:-.045em;line-height:1.05;white-space:nowrap;font-variant-numeric:tabular-nums}
 .case .fig small{font-size:.42em;font-weight:600;letter-spacing:-.02em;margin-left:4px;color:var(--ink2)}
-.case .cap{margin:0 0 20px;font-size:17px;font-weight:600;color:var(--ink);white-space:nowrap}
+.case .cap{margin:0 0 20px;font-size:17px;font-weight:600;color:var(--ink);text-wrap:balance}
 .case dl{margin:0;padding:0}
 .case dt{font-size:13px;font-weight:700;color:var(--muted);margin:14px 0 3px;letter-spacing:0}
 .case dt:first-child{margin-top:0}
 .case dd{margin:0;font-size:16px;line-height:1.5;color:var(--ink2)}
 .case dl{border-top:1px solid var(--line);padding-top:16px}
 .cases-note{margin:28px 0 0;text-align:center;color:var(--muted);font-size:16px}
+/* real screenshots */
+.shot{margin:18px 0 20px}
+.shot a{display:block;aspect-ratio:4/3;background:var(--shot-paper);border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px var(--shot-line),var(--shot-shadow)}
+.shot a:hover{text-decoration:none}
+.shot img{display:block;width:100%;height:100%;object-fit:contain}
+.shot.cover img{object-fit:cover;object-position:center bottom}
+.shot figcaption{margin-top:9px;font-size:13px;color:var(--faint);white-space:nowrap}
 @media (max-width:1000px){.cases{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.cases{grid-template-columns:minmax(0,1fr);gap:12px}.case{border-radius:20px;padding:26px 22px}}
 
-/* raco case */
-.case.raco{grid-column:1/-1;padding:34px 34px 30px}
-.raco-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.raco h3{margin:6px 0 0;font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-.035em;white-space:nowrap}
+/* collapsed extra cases */
+.cases:not(.open) .extra{display:none}
+.more-wrap{text-align:center;margin-top:28px}
+.more-wrap .btn{gap:10px}
+.more-wrap .chev{width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.more-wrap .btn[aria-expanded="true"] .chev{transform:translateY(2px) rotate(-135deg)}
+@media (prefers-reduced-motion:reduce){.more-wrap .chev{transition:none}}
+
+/* free tool section */
+.free{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.raco .tag{font-size:15px;font-weight:600;white-space:nowrap}
 .raco .tag.soon{color:var(--orange)}
-.raco dl.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:22px}
-.raco dl.cols dt{margin-top:0}
-.raco details{margin-top:24px}
+.raco h3{margin:8px 0 0;font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-.035em;white-space:nowrap}
+.free-copy dl{margin:22px 0 0;padding:16px 0 0;border-top:1px solid var(--line)}
+.free-copy dt{font-size:13px;font-weight:700;color:var(--muted);margin:16px 0 3px}
+.free-copy dt:first-child{margin-top:0}
+.free-copy dd{margin:0;font-size:17px;line-height:1.55;color:var(--ink2)}
+.free .shot{margin:0}
+.free .shot a{aspect-ratio:auto;border-radius:18px}
+.free .shot img{height:auto}
+.raco details{margin-top:44px;text-align:center}
 .raco summary{list-style:none;display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:16px;font-weight:600;color:var(--link);border:1.5px solid var(--link);border-radius:980px;padding:10px 20px;white-space:nowrap;user-select:none}
 .raco summary::-webkit-details-marker{display:none}
 .raco summary:hover{background:color-mix(in srgb,var(--link) 9%,transparent)}
@@ -219,8 +244,8 @@ h2{font-size:clamp(23px,5.9vw,52px)}
 .raco summary .when-open{display:none}
 .raco details[open] summary .when-open{display:inline}
 .raco details[open] summary .when-closed{display:none}
-.raco-body{padding-top:28px}
-@media (max-width:734px){.case.raco{padding:26px 22px}.raco dl.cols{grid-template-columns:minmax(0,1fr);gap:0}.raco dl.cols dt{margin-top:14px}.raco dl.cols div:first-child dt{margin-top:0}}
+.raco-body{padding-top:28px;text-align:left}
+@media (max-width:820px){.free{grid-template-columns:minmax(0,1fr);gap:32px}}
 
 /* tool mock */
 .stage{margin:0 auto;max-width:600px}
@@ -288,6 +313,7 @@ h2{font-size:clamp(23px,5.9vw,52px)}
 .proc li::before{content:counter(p);display:block;font-size:clamp(44px,5vw,60px);font-weight:700;letter-spacing:-.05em;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
 .proc b{display:block;margin-top:22px;font-size:clamp(20px,2.3vw,24px);font-weight:700;letter-spacing:-.03em;white-space:nowrap}
 .proc span{display:block;color:var(--ink2);font-size:16px;margin-top:8px;line-height:1.55}
+.alt .proc li{background:var(--tile)}
 .proc-note{margin:28px 0 0;text-align:center;color:var(--muted);font-size:16px}
 @media (max-width:900px){.proc{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.proc{grid-template-columns:minmax(0,1fr);gap:10px}
@@ -305,11 +331,16 @@ h2{font-size:clamp(23px,5.9vw,52px)}
 .pm::after{transform:rotate(90deg)}
 .faq details[open] .pm::after{transform:rotate(0)}
 .faq .a{margin:-6px 0 0;padding:0 34px 26px 0;color:var(--ink2);font-size:17px;line-height:1.65}
+.faq div.a p{margin:0}
+.faq div.a p + ul,.faq div.a ul + p{margin-top:10px}
+.faq div.a ul{margin:0;padding:0;list-style:none;border-left:2px solid var(--line)}
+.faq div.a li{padding:3px 0 3px 14px}
+.faq div.a li b{font-weight:600;color:var(--ink)}
 @media (max-width:734px){.faq summary{padding:20px 0}.faq .a{padding-right:0;font-size:16px}}
 
 /* about */
 .about{max-width:760px;margin:0 auto}
-.about p{margin:18px 0 0;font-size:clamp(18px,2vw,20px);line-height:1.7;color:var(--ink2)}
+.about p{text-wrap:pretty;margin:18px 0 0;font-size:clamp(18px,2vw,20px);line-height:1.7;color:var(--ink2)}
 .about p:first-of-type{margin-top:22px}
 
 /* contact */
@@ -369,7 +400,7 @@ footer a{color:var(--muted)}
   <div class="nav-links">
     <a href="#cases">사례</a>
     <a href="#cost">비용</a>
-    <a class="nav-cta" href="#contact">무료 상담</a>
+    <a class="nav-cta" href="#apply">무료 상담</a>
   </div>
 </div></nav>
 
@@ -379,36 +410,37 @@ footer a{color:var(--muted)}
 <header class="hero"><div class="wrap">
   <span class="eyebrow">패션 · 물류 · 사무 맞춤 자동화</span>
   <h1>매일 반복하는 일, 이제 자동으로.</h1>
-  <p class="lead">주문·재고·엑셀 같은 반복 업무를, 회사에 맞는 자동화 프로그램으로 만들어드립니다.</p>
+  <p class="lead">주문·재고·엑셀 같은 반복 업무를, 회사에 맞는 자동화 프로그램으로 만들어드려요.</p>
+  <p class="hero-origin">LA에서 의류 도매 회사를 운영하며, 매일 하던 일을 하나씩 자동화해 온 사람이 만들어요.</p>
   <div class="ctas">
     <a class="btn btn-lg" href="#apply">무료 상담 신청</a>
     <a class="btn btn-lg btn-ghost" href="#cases">실제 사례 보기</a>
   </div>
-  <p class="hero-meta">전화 없이 온라인으로만 · 평일 저녁·주말 답변</p>
+  <p class="hero-meta">상담은 온라인으로만 · 평일 저녁·주말 답변</p>
 </div></header>
 
 <!-- 2. Problem → Solution -->
 <section class="alt"><div class="wrap">
   <div class="head">
-    <h2>반복 업무, 이렇게 바꿉니다.</h2>
+    <h2>반복 업무, 이렇게 바꿔요.</h2>
   </div>
   <div class="ps-head" aria-hidden="true"><span>지금의 불편</span><span>LazyHand로 바꾸면</span></div>
   <div class="ps">
     <div class="ps-row">
-      <div><h3>재고는 있는데 온라인엔 품절.</h3><p class="p-d">창고 숫자와 사이트 숫자가 따로 움직입니다.</p></div>
-      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>판매 가능한 재고를 매일 웹사이트·도매 사이트에 자동 반영합니다.</p></div>
+      <div><h3>재고는 있는데 온라인엔 품절.</h3><p class="p-d">창고 숫자와 사이트 숫자가 따로 움직여요.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>판매 가능한 재고를 매일 웹사이트·도매 사이트에 자동으로 반영해요.</p></div>
     </div>
     <div class="ps-row">
-      <div><h3>월말 커미션 계산에 하루.</h3><p class="p-d">인보이스를 하나씩 엑셀로 옮기고, 입금을 확인합니다.</p></div>
-      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>배송·입금이 끝난 인보이스 기준으로 매월 자동 계산해 이메일로 보냅니다.</p></div>
+      <div><h3>월말 커미션 계산에 하루.</h3><p class="p-d">인보이스를 하나씩 엑셀로 옮기고, 입금을 확인해요.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>배송·입금이 끝난 인보이스 기준으로 매월 자동 계산해서 이메일로 보내드려요.</p></div>
     </div>
     <div class="ps-row">
-      <div><h3>인보이스·라벨 하나씩 출력.</h3><p class="p-d">주문마다 같은 화면을 열고 같은 내용을 붙여넣습니다.</p></div>
-      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>인보이스·카드 결제·라벨·트래킹을 한 화면에서 이어서 처리합니다.</p></div>
+      <div><h3>인보이스·라벨 하나씩 출력.</h3><p class="p-d">주문마다 같은 화면을 열고 같은 내용을 붙여넣어요.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>인보이스·카드 결제·라벨·트래킹을 한 화면에서 이어서 처리해요.</p></div>
     </div>
     <div class="ps-row">
-      <div><h3>배송비가 왜 이렇게 나오지?</h3><p class="p-d">주소 보정비, 무게 차액. 청구서를 한 줄씩 볼 시간이 없습니다.</p></div>
-      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>배송 청구서를 자동으로 전수 검사해 새는 비용과 원인을 찾아냅니다.</p></div>
+      <div><h3>배송비가 왜 이렇게 나오지?</h3><p class="p-d">주소 보정비, 무게 차액. 청구서를 한 줄씩 볼 시간이 없어요.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>배송 청구서를 자동으로 전수 검사해서 새는 비용과 원인을 찾아드려요.</p></div>
     </div>
   </div>
 </div></section>
@@ -416,8 +448,8 @@ footer a{color:var(--muted)}
 <!-- 3. 대표 자동화 -->
 <section id="work"><div class="wrap">
   <div class="head center">
-    <h2>대표 자동화 3가지.</h2>
-    <p class="lead">업종별로 가장 많이 반복되는 일부터 자동으로 바꿉니다.</p>
+    <h2>이런 일을 자동으로 바꿔요.</h2>
+    <p class="lead">업종별로 가장 많이 반복되는 일부터 하나씩 자동으로 바꿔드려요.</p>
   </div>
   <div class="inds">
     <div class="ind">
@@ -430,7 +462,7 @@ footer a{color:var(--muted)}
     </div>
     <div class="ind">
       <h3>사무 · 회계</h3><p class="sub">반복되는 서류와 숫자는 맡기고.</p>
-      <ul><li>인보이스 · 카드 결제</li><li>엑셀 정리 · 보고서</li><li>이메일 자동 발송</li><li>오픈 오더 정리</li></ul>
+      <ul><li>인보이스 · 카드 결제</li><li>엑셀 정리 · 보고서</li><li>이메일 자동 발송</li><li>미출고 주문 정리</li></ul>
     </div>
   </div>
 </div></section>
@@ -446,40 +478,25 @@ footer a{color:var(--muted)}
     <li class="step"><b>카드 결제</b><span>저장된 카드로 결제</span></li>
     <li class="step"><b>라벨 · 트래킹</b><span>라벨 출력, 번호 자동 입력</span></li>
   </ol>
-  <p class="flow-note">주문을 고르면 네 단계를 프로그램이 이어서 처리합니다. <strong>주소 오류·결제 실패 같은 예외는 멈추고 사람에게 알립니다.</strong></p>
+  <p class="flow-note">주문을 고르면 네 단계를 프로그램이 이어서 처리해요. <strong>주소 오류·결제 실패 같은 예외는 멈추고 사람에게 알려드려요.</strong></p>
 </div></section>
 
 <!-- Stock + documents -->
 <section class="alt"><div class="wrap">
   <div class="head center">
     <h2>팔 수 있는 재고만, 온라인에.</h2>
-    <p class="lead">판매 가능한 재고를 온라인에 자동 반영. 있는데 품절, 없는데 팔리는 일을 막습니다.</p>
+    <p class="lead">판매 가능한 재고를 온라인에 자동으로 반영해서, 재고 불일치와 초과 주문을 줄여드려요.</p>
   </div>
-  <div class="rv stock">
-    <div class="panel wh">
-      <div class="k">창고 (ERP)</div>
-      <div><div class="n">120</div><div class="u">판매 가능 재고</div></div>
-    </div>
-    <div class="panel">
-      <ul class="ch">
-        <li><span class="nm">내 웹사이트</span><span class="q"><b>120</b><em>일치</em></span></li>
-        <li><span class="nm">도매 사이트 A</span><span class="q"><b>120</b><em>일치</em></span></li>
-        <li><span class="nm">도매 사이트 B</span><span class="q"><b>120</b><em>일치</em></span></li>
-      </ul>
-      <div class="stamp">화면 예시 · 매일 자동으로 다시 맞춥니다</div>
-    </div>
-  </div>
-
   <div class="sub-head center">
     <h2>문서 작업도 알아서.</h2>
   </div>
   <div class="docs">
     <div class="doc"><div class="art" aria-hidden="true"><div class="grid-a"></div><div class="arr"></div><div class="grid-b"></div></div>
-      <h3>엑셀 정리</h3><p>여기저기서 받은 엑셀을 매일 같은 모양의 보고서로.</p></div>
+      <h3>엑셀 정리</h3><p>여기저기서 받은 엑셀을 매일 같은 모양의 보고서로 만들어요.</p></div>
     <div class="doc"><div class="art" aria-hidden="true"><div class="pages"><i></i><i></i><i></i></div><div class="arr"></div><div class="onefile"></div></div>
-      <h3>PDF 자동 작성</h3><p>여러 장의 서류를 한 파일로 묶어 자동으로 완성.</p></div>
+      <h3>PDF 자동 작성</h3><p>여러 장의 서류를 한 파일로 묶어 자동으로 완성해요.</p></div>
     <div class="doc"><div class="art" aria-hidden="true"><div class="sheet"><i></i><i></i><i></i></div></div>
-      <h3>라인싯 제작</h3><p>상품 사진과 가격으로 손님에게 보낼 카탈로그를.</p></div>
+      <h3>라인싯 제작</h3><p>상품 사진과 가격으로 손님에게 보낼 카탈로그를 만들어요.</p></div>
   </div>
 </div></section>
 
@@ -487,210 +504,223 @@ footer a{color:var(--muted)}
 <section id="cases"><div class="wrap">
   <div class="head center">
     <h2>실제 제작 사례.</h2>
-    <p class="lead">모든 사례는 LA 의류 도매 A사에서 실제 운영 중인 자동화입니다.</p>
+    <p class="lead">사례 속 A사는 LazyHand를 만든 사람이 운영하는 LA 의류 도매 회사예요. 모두 지금도 매일 실제로 돌아가는 자동화예요.</p>
   </div>
 
-  <div class="cases">
-    <article class="case">
-      <span class="tag">배송 청구서 감사</span>
-      <div class="fig">$1,485<small>/년</small></div>
-      <p class="cap">새는 배송비 발견</p>
-      <dl>
-        <dt>기존 불편</dt><dd>UPS 청구서를 한 줄씩 확인할 시간이 없었습니다.</dd>
-        <dt>만든 기능</dt><dd>청구서를 자동으로 전수 검사해 무게 과소신고 정정·검사 수수료·주소 보정비를 분류합니다.</dd>
-        <dt>결과</dt><dd>연 약 $1,485의 새는 비용 발견(주소 보정비만 연 $866). 원인인 잘못 저장된 거래처 주소까지 찾았습니다.</dd>
-      </dl>
-    </article>
-
-    <article class="case">
-      <span class="tag">웹사이트 도매가 검사</span>
-      <div class="fig">149<small>건</small></div>
-      <p class="cap">잘못된 가격 발견 · 수정</p>
-      <dl>
-        <dt>기존 불편</dt><dd>상품이 많아 웹사이트 가격이 ERP와 맞는지 확인할 수 없었습니다.</dd>
-        <dt>만든 기능</dt><dd>상품 2,220개의 가격을 ERP와 자동으로 대조합니다.</dd>
-        <dt>결과</dt><dd>잘못된 가격 149건을 찾아 수정, 수정 과정 오류 0건.</dd>
-      </dl>
-    </article>
-
-    <article class="case">
-      <span class="tag">재고 자동 반영</span>
-      <div class="fig">3<small>채널 · 매일</small></div>
-      <p class="cap">판매 가능 재고 자동 반영</p>
-      <dl>
-        <dt>기존 불편</dt><dd>재고가 있는데 품절로 뜨거나, 없는데 팔리는 일이 생겼습니다.</dd>
-        <dt>만든 기능</dt><dd>매일 ERP의 판매 가능 재고를 웹사이트와 도매 사이트 2곳에 반영합니다.</dd>
-        <dt>결과</dt><dd>세 곳의 재고가 매일 ERP 기준으로 다시 맞춰집니다.</dd>
-      </dl>
-    </article>
-
+  <div class="cases" id="case-list">
     <article class="case">
       <span class="tag">주문 처리 앱</span>
       <div class="fig">4단계<small>한 화면</small></div>
       <p class="cap">주문부터 트래킹까지</p>
+      <figure class="shot cover"><a href="img/order-app.webp" target="_blank" rel="noopener" aria-label="주문 처리 앱 실제 화면 크게 보기"><img src="img/order-app.webp" alt="주문 처리 앱 실제 화면" width="814" height="904" loading="lazy" decoding="async"></a><figcaption>실제 화면 · 고객 정보는 가렸습니다</figcaption></figure>
       <dl>
-        <dt>기존 불편</dt><dd>주문마다 여러 프로그램을 오가며 같은 내용을 입력했습니다.</dd>
-        <dt>만든 기능</dt><dd>인보이스 생성, 카드 결제, 배송 라벨 출력, 트래킹 입력을 한 화면에서 이어서 처리합니다.</dd>
-        <dt>결과</dt><dd>주소 오류·결제 실패 같은 예외만 사람이 확인합니다.</dd>
+        <dt>기존 불편</dt><dd>주문마다 여러 프로그램을 오가며 같은 내용을 입력했어요.</dd>
+        <dt>만든 기능</dt><dd>인보이스 생성, 카드 결제, 배송 라벨 출력, 트래킹 입력을 한 화면에서 이어서 처리해요.</dd>
+        <dt>결과</dt><dd>주소 오류·결제 실패 같은 예외만 사람이 확인하면 돼요.</dd>
       </dl>
     </article>
-
     <article class="case">
+      <span class="tag">재고 자동 반영</span>
+      <div class="fig">3<small>채널 · 매일</small></div>
+      <p class="cap">판매 가능 재고 자동 반영</p>
+      <figure class="shot"><a href="img/stock-sync.webp" target="_blank" rel="noopener" aria-label="재고 자동 반영 실제 실행 기록 크게 보기"><img src="img/stock-sync.webp" alt="재고 자동 반영 실제 실행 기록" width="1200" height="614" loading="lazy" decoding="async"></a><figcaption>실제 실행 기록 · 상품 정보는 가렸습니다</figcaption></figure>
+      <dl>
+        <dt>기존 불편</dt><dd>재고가 있는데 품절로 뜨거나, 없는데 팔리는 일이 생겼어요.</dd>
+        <dt>만든 기능</dt><dd>매일 ERP의 판매 가능 재고를 웹사이트와 도매 사이트 2곳에 반영해요.</dd>
+        <dt>결과</dt><dd>세 곳의 재고가 매일 ERP 기준으로 다시 맞춰져요.</dd>
+      </dl>
+    </article>
+    <article class="case">
+      <span class="tag">웹사이트 도매가 검사</span>
+      <div class="fig">149<small>건</small></div>
+      <p class="cap">잘못된 가격 발견 · 수정</p>
+      <figure class="shot"><a href="img/price-check.webp" target="_blank" rel="noopener" aria-label="웹사이트 가격 검사 실제 결과 일부 크게 보기"><img src="img/price-check.webp" alt="웹사이트 가격 검사 실제 결과 일부" width="1176" height="742" loading="lazy" decoding="async"></a><figcaption>실제 검사 결과 일부 · 상품 정보는 가렸습니다</figcaption></figure>
+      <dl>
+        <dt>기존 불편</dt><dd>상품이 많아 웹사이트 가격이 ERP와 맞는지 확인할 수 없었어요.</dd>
+        <dt>만든 기능</dt><dd>상품 2,220개의 가격을 ERP와 자동으로 대조해요.</dd>
+        <dt>결과</dt><dd>잘못된 가격 149건을 찾아 고쳤어요. 작업 후 재검증 기준 오류 0건이에요.</dd>
+      </dl>
+    </article>
+    <article class="case extra">
       <span class="tag">월 커미션 계산</span>
       <div class="fig">매월 1일</div>
       <p class="cap">커미션 자동 계산 · 발송</p>
       <dl>
-        <dt>기존 불편</dt><dd>인보이스를 하나씩 엑셀로 옮겨 커미션을 계산했습니다.</dd>
-        <dt>만든 기능</dt><dd>배송·입금이 끝난 인보이스 기준으로 영업 담당 커미션을 계산해 이메일로 보냅니다.</dd>
-        <dt>결과</dt><dd>사람이 빠뜨린 인보이스까지 잡아냅니다.</dd>
+        <dt>기존 불편</dt><dd>인보이스를 하나씩 엑셀로 옮겨 커미션을 계산했어요.</dd>
+        <dt>만든 기능</dt><dd>배송·입금이 끝난 인보이스 기준으로 영업 담당 커미션을 계산해서 이메일로 보내요.</dd>
+        <dt>결과</dt><dd>사람이 빠뜨린 인보이스까지 잡아내요.</dd>
       </dl>
     </article>
-
-    <article class="case">
-      <span class="tag">오픈 오더 정리</span>
+    <article class="case extra">
+      <span class="tag">미출고 주문 정리</span>
       <div class="fig">453<small>라인</small></div>
-      <p class="cap">죽은 주문 라인 정리</p>
+      <p class="cap">처리할 수 없는 미출고 주문 정리</p>
       <dl>
-        <dt>기존 불편</dt><dd>재고도 입고 예정도 없는 주문 라인이 화면에 쌓여 있었습니다.</dd>
-        <dt>만든 기능</dt><dd>조건에 맞는 라인을 찾아 한 번에 정리합니다.</dd>
-        <dt>결과</dt><dd>181개 주문의 453개 라인 정리, 오류 0건.</dd>
+        <dt>기존 불편</dt><dd>재고도 입고 예정도 없는 주문 라인이 화면에 쌓여 있었어요.</dd>
+        <dt>만든 기능</dt><dd>재고도 입고 예정도 없어 출고할 수 없는 주문 라인을 찾아 한 번에 정리해요.</dd>
+        <dt>결과</dt><dd>181개 주문의 453개 라인을 정리했어요. 작업 후 재검증 기준 오류 0건이에요.</dd>
       </dl>
     </article>
-
-    <article class="case raco" id="free">
-      <div class="raco-top">
-        <div>
-          <span class="tag soon">실제 운영 중 · 무료 배포 준비 중</span>
-          <h3>라코 구인광고 자동 올리기</h3>
-        </div>
-      </div>
-      <dl class="cols">
-        <div><dt>기존 불편</dt><dd>라디오코리아 구인광고를 매번 들어가 복사·붙여넣기로 다시 올렸습니다.</dd></div>
-        <div><dt>만든 기능</dt><dd>3·5·7일 주기, 오전 8시~오후 10시 중 하루 최대 5번 선택. 비밀번호는 내 PC에만 암호화 저장, 기간이 지나면 알림 팝업.</dd></div>
-        <div><dt>결과</dt><dd>정한 시간에 알아서 다시 올립니다.</dd></div>
+    <article class="case extra">
+      <span class="tag">배송 청구서 감사</span>
+      <div class="fig">$1,485<small>/년</small></div>
+      <p class="cap">새는 배송비 발견</p>
+      <dl>
+        <dt>기존 불편</dt><dd>UPS 청구서를 한 줄씩 확인할 시간이 없었어요.</dd>
+        <dt>만든 기능</dt><dd>청구서를 자동으로 전수 검사해 무게 과소신고 정정·검사 수수료·주소 보정비를 나눠서 보여줘요.</dd>
+        <dt>결과</dt><dd>새는 비용 연 약 $1,485를 찾았고, 이 중 주소 보정비가 연 $866이에요. 원인인 잘못 저장된 거래처 주소까지 찾았어요.</dd>
+        <dt>기준</dt><dd>UPS 청구서 점검 기간 기준 연간 환산 금액이에요.</dd>
       </dl>
-      <details id="raco-more">
-        <summary><span class="when-closed">자세히 보기</span><span class="when-open">접기</span><span class="chev" aria-hidden="true"></span></summary>
-        <div class="raco-body">
-          <div class="stage">
-            <div class="win" role="group" aria-label="프로그램 미리보기">
-              <div class="win-bar" aria-hidden="true">
-                <span class="win-ico"></span><span class="win-title">라코 구인광고 자동 올리기</span>
-                <span class="wc min"></span><span class="wc max"></span><span class="wc cls"></span>
-              </div>
-              <div class="win-body">
-                <div class="f">
-                  <div class="f-l">다시 올리는 주기</div>
-                  <div class="seg" id="period" role="group" aria-label="주기">
-                    <button class="opt" type="button" aria-pressed="true" data-d="3">3일</button>
-                    <button class="opt" type="button" aria-pressed="false" data-d="5">5일</button>
-                    <button class="opt" type="button" aria-pressed="false" data-d="7">7일</button>
-                  </div>
-                </div>
-                <div class="f">
-                  <div class="f-l">올리는 시간 <small>하루 최대 5개 · <span class="cnt" id="cnt">0 / 5</span></small></div>
-                  <div class="slots" id="slots" role="group" aria-label="올리는 시간"></div>
-                  <div class="picked" id="picked">원하는 시간을 클릭하세요</div>
-                </div>
-                <div class="f">
-                  <div class="two">
-                    <div><div class="f-l">라코 아이디</div><input id="uid" autocomplete="off" placeholder="아이디"></div>
-                    <div><div class="f-l">라코 비밀번호</div><input id="upw" type="password" autocomplete="new-password" placeholder="비밀번호"></div>
-                  </div>
-                  <div class="hint">비밀번호는 이 컴퓨터에만 암호화해서 저장됩니다.</div>
-                </div>
-                <div class="f"><div class="f-l">광고 제목</div><input id="ttl" placeholder="예) 다운타운 봉제공장 미싱사 구합니다"></div>
-                <div class="f"><div class="f-l">광고 내용</div><textarea id="txt" placeholder="근무 시간, 급여, 위치, 연락 방법 등"></textarea></div>
-                <button class="save" type="button" id="go">저장하고 자동 올리기 시작</button>
-                <div class="msg" id="msg" role="status"></div>
-              </div>
-              <div class="win-ad">
-                <span><b>다른 일도 자동으로?</b>온라인 문의만 · 평일 저녁·주말 답변</span>
-                <a href="#contact">LazyHand 문의 ›</a>
-              </div>
-            </div>
-          </div>
-          <ul class="facts">
-            <li><b>정한 주기마다</b><span>3일 · 5일 · 7일 중 선택</span></li>
-            <li><b>기간이 지나면 알림</b><span>팝업으로 다시 알려드립니다</span></li>
-            <li><b>컴퓨터는 켜두세요</b><span>켜져 있어야 올라갑니다</span></li>
-          </ul>
-          <div class="raco-dl"><button class="btn" type="button" disabled>무료 다운로드 · 준비 중</button>
-          <p class="raco-note">A사에서 실제 쓰고 있는 프로그램을 다른 분들도 쓸 수 있게 무료 배포판으로 준비하고 있습니다. Windows 10·11용 · 라디오코리아와 관련 없는 독립 프로그램입니다.</p></div>
-        </div>
-      </details>
     </article>
   </div>
+  <div class="more-wrap"><button class="btn btn-ghost" type="button" id="more-btn" aria-expanded="false" aria-controls="case-list"><span class="more-label">사례 더 보기</span><span class="chev" aria-hidden="true"></span></button></div>
+</div></section>
+
+<!-- 4b. 무료 프로그램 -->
+<section class="alt raco" id="free"><div class="wrap">
+  <div class="head center">
+    <h2>직접 만들어 쓰는 무료 프로그램.</h2>
+    <p class="lead">LA 사장님들을 위해, 저희가 매일 쓰는 프로그램을 나눠요.</p>
+  </div>
+  <div class="free">
+    <div class="free-copy">
+      <span class="tag soon">실제 운영 중 · Microsoft Store 심사 중</span>
+      <h3>라코 구인광고 자동 올리기</h3>
+      <dl>
+        <dt>기존 불편</dt><dd>라디오코리아 구인광고를 매번 들어가 복사·붙여넣기로 다시 올렸어요.</dd>
+        <dt>만든 기능</dt><dd>3·5·7일 주기, 오전 8시~오후 10시 중 하루 최대 5번을 골라요. 비밀번호는 내 PC에만 암호화해서 저장하고, 기간이 지나면 알림 팝업으로 알려드려요.</dd>
+        <dt>결과</dt><dd>정한 시간에 알아서 다시 올려줘요.</dd>
+      </dl>
+    </div>
+    <figure class="shot"><a href="img/raco-app.webp" target="_blank" rel="noopener" aria-label="라코 구인광고 자동 올리기 실제 화면 크게 보기"><img src="img/raco-app.webp" alt="라코 구인광고 자동 올리기 실제 화면, 주기와 올리는 시간 선택" width="624" height="370" loading="lazy" decoding="async"></a><figcaption>실제 화면 · 예시 데이터로 입력했습니다</figcaption></figure>
+  </div>
+    <details id="raco-more">
+      <summary><span class="when-closed">자세히 보기</span><span class="when-open">접기</span><span class="chev" aria-hidden="true"></span></summary>
+      <div class="raco-body">
+        <div class="stage">
+          <div class="win" role="group" aria-label="프로그램 미리보기">
+            <div class="win-bar" aria-hidden="true">
+              <span class="win-ico"></span><span class="win-title">라코 구인광고 자동 올리기</span>
+              <span class="wc min"></span><span class="wc max"></span><span class="wc cls"></span>
+            </div>
+            <div class="win-body">
+              <div class="f">
+                <div class="f-l">다시 올리는 주기</div>
+                <div class="seg" id="period" role="group" aria-label="주기">
+                  <button class="opt" type="button" aria-pressed="true" data-d="3">3일</button>
+                  <button class="opt" type="button" aria-pressed="false" data-d="5">5일</button>
+                  <button class="opt" type="button" aria-pressed="false" data-d="7">7일</button>
+                </div>
+              </div>
+              <div class="f">
+                <div class="f-l">올리는 시간 <small>하루 최대 5개 · <span class="cnt" id="cnt">0 / 5</span></small></div>
+                <div class="slots" id="slots" role="group" aria-label="올리는 시간"></div>
+                <div class="picked" id="picked">원하는 시간을 눌러 주세요</div>
+              </div>
+              <div class="f">
+                <div class="two">
+                  <div><div class="f-l">라코 아이디</div><input id="uid" autocomplete="off" placeholder="아이디"></div>
+                  <div><div class="f-l">라코 비밀번호</div><input id="upw" type="password" autocomplete="new-password" placeholder="비밀번호"></div>
+                </div>
+                <div class="hint">비밀번호는 이 컴퓨터에만 암호화해서 저장돼요.</div>
+              </div>
+              <div class="f"><div class="f-l">광고 제목</div><input id="ttl" placeholder="예) 다운타운 봉제공장 미싱사 구합니다"></div>
+              <div class="f"><div class="f-l">광고 내용</div><textarea id="txt" placeholder="근무 시간, 급여, 위치, 연락 방법 등"></textarea></div>
+              <button class="save" type="button" id="go">저장하고 자동 올리기 시작</button>
+              <div class="msg" id="msg" role="status"></div>
+            </div>
+            <div class="win-ad">
+              <span><b>다른 일도 자동으로?</b>온라인 문의만 · 평일 저녁·주말 답변</span>
+              <a href="#apply">LazyHand 문의 ›</a>
+            </div>
+          </div>
+        </div>
+        <ul class="facts">
+          <li><b>정한 주기마다</b><span>3일 · 5일 · 7일 중 선택</span></li>
+          <li><b>기간이 지나면 알림</b><span>팝업으로 다시 알려드려요</span></li>
+          <li><b>컴퓨터는 켜두세요</b><span>켜져 있어야 올라가요</span></li>
+        </ul>
+        <div class="raco-dl"><button class="btn" type="button" disabled>Microsoft Store 심사 중</button>
+        <p class="raco-note">A사에서 실제로 쓰고 있는 프로그램을 다른 분들도 무료로 쓰실 수 있게 Microsoft Store에 제출했고, 지금 심사 중이에요. Windows 10·11용 · 라디오코리아와 관련 없는 독립 프로그램이에요.</p></div>
+      </div>
+    </details>
 </div></section>
 
 <!-- 5. 연결 프로그램 -->
-<section class="alt tight"><div class="wrap">
+<section class="tight"><div class="wrap">
   <div class="head center">
     <h2>쓰시던 프로그램에 연결.</h2>
-    <p class="lead">새 프로그램을 배울 필요 없이, 지금 쓰는 프로그램에 붙여서 만듭니다.</p>
+    <p class="lead">쓰시던 프로그램은 그대로 두고, 반복 작업만 줄여드려요.</p>
   </div>
   <ul class="logos" id="logos"></ul>
-  <p class="logo-note">로고는 연결해 본 적 있거나 연결 가능한 프로그램입니다. 연동 가능 여부와 방식은 사용 환경 확인 후 안내합니다.</p>
+  <p class="logo-note">로고는 연결해 본 적 있거나 연결 가능한 프로그램이에요. 연동 가능 여부와 방식은 사용 환경을 확인한 뒤 알려드려요.</p>
 </div></section>
 
 <!-- 6. 제작 과정 -->
-<section id="process"><div class="wrap">
+<section class="alt" id="process"><div class="wrap">
   <div class="head center">
     <h2>제작 과정.</h2>
-    <p class="lead">처음부터 끝까지 온라인으로 진행합니다.</p>
+    <p class="lead">처음부터 끝까지 온라인으로 진행해요.</p>
   </div>
   <ol class="proc">
-    <li><b>무료 상담</b><span>문의 폼에 반복하는 일을 적어주세요. 자동화가 가능한지, 어떤 방식이 맞는지 무료로 알려드립니다.</span></li>
-    <li><b>견적</b><span>작업 범위와 비용, 일정을 이메일로 안내합니다. 진행이 정해지면 선금 50%로 시작합니다.</span></li>
-    <li><b>제작 · 테스트</b><span>실제 데이터로 돌려보며 회사 업무에 맞는지 함께 확인합니다.</span></li>
-    <li><b>인도 · 지원</b><span>사용법을 안내하고, 인도 후 60~90일 동안 무상으로 수정·지원합니다.</span></li>
+    <li><b>무료 상담</b><span>문의 폼에 반복하는 일을 적어주세요. 자동화가 가능한지, 어떤 방식이 맞는지 무료로 알려드려요.</span></li>
+    <li><b>견적</b><span>작업 범위와 비용, 일정을 이메일로 알려드려요. 진행이 정해지면 선금 50%로 시작해요.</span></li>
+    <li><b>제작 · 테스트</b><span>실제 데이터로 돌려보면서 회사 업무에 맞는지 함께 확인해요.</span></li>
+    <li><b>인도 · 지원</b><span>사용법을 알려드리고, 인도 후 60~90일 동안 만든 기능의 오류는 무상으로 고쳐드려요.</span></li>
   </ol>
 </div></section>
 
 <!-- 7. 비용 · 지원 FAQ -->
-<section class="alt" id="cost"><div class="wrap">
+<section id="cost"><div class="wrap">
   <div class="head center">
     <h2>비용 · 지원.</h2>
   </div>
   <div class="faq">
     <details><summary>제작비는 어떻게 정하나요?<span class="pm" aria-hidden="true"></span></summary>
-      <p class="a">작업 범위를 보고 견적을 드립니다. 결제는 선금 50%, 완료 후 50%입니다.</p></details>
+      <p class="a">작업 범위를 보고 견적을 드려요. 결제는 선금 50%, 완료 후 50%예요.</p></details>
     <details><summary>매달 내는 비용이 있나요?<span class="pm" aria-hidden="true"></span></summary>
-      <p class="a">LazyHand 월 사용료는 없습니다. 연결하는 외부 서비스에 자체 요금이 있다면, 그 요금만 해당 서비스에 직접 내시면 됩니다.</p></details>
+      <p class="a">LazyHand 월 사용료는 없어요. 연결하는 외부 서비스에 자체 요금이 있다면, 그 요금만 해당 서비스에 직접 내시면 돼요.</p></details>
     <details><summary>얼마나 걸리나요?<span class="pm" aria-hidden="true"></span></summary>
-      <p class="a">작업 범위에 따라 다릅니다. 견적을 드릴 때 일정을 함께 안내합니다.</p></details>
+      <p class="a">작업 범위에 따라 달라요. 견적을 드릴 때 일정도 함께 알려드려요.</p></details>
     <details><summary>만든 뒤 수정·지원은요?<span class="pm" aria-hidden="true"></span></summary>
-      <p class="a">인도 후 60~90일 동안 무상으로 수정·지원합니다. 그 이후는 별도로 협의합니다.</p></details>
-    <details><summary>전화 상담 되나요?<span class="pm" aria-hidden="true"></span></summary>
-      <p class="a">전화 없이 온라인·이메일로만 진행합니다. 답변은 평일 저녁과 주말에 드립니다.</p></details>
+      <div class="a"><p>인도 후 60~90일 동안(프로젝트 규모에 따라 견적서에 확정) 아래와 같이 지원해 드려요.</p>
+        <ul><li><b>만든 기능의 오류 수정</b> · 무상</li><li><b>새 기능 추가</b> · 별도 견적</li><li><b>연결된 외부 프로그램·사이트가 바뀌어 생기는 수정</b> · 별도 견적</li></ul>
+        <p>기간 이후의 지원은 별도로 협의해요.</p></div></details>
+    <details><summary>설치·업데이트·수리는 어떻게 하나요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">전부 원격으로 해요. 설치는 보내드리는 링크를 한 번 누르면 끝나고, 업데이트는 프로그램이 알아서 받아요. 문제가 생기면 프로그램 안의 &lsquo;원격 지원 요청&rsquo; 버튼을 누르고 화면에 나오는 코드를 이메일로 보내주시면, Windows 기본 기능인 빠른 지원으로 접속해서 고쳐드려요. 방문이나 전화는 필요 없어요.</p></details>
+    <details><summary>업무 시간에 문제가 생기면요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">납품 후 오류 신고는 이메일로 24시간 접수해요. 프로그램이 멈춰 업무가 막히는 장애는 접수 당일 저녁에 우선 처리하고, 일반 수정 요청은 평일 저녁·주말에 처리해요.</p></details>
+    <details><summary>상담은 어떻게 하나요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">상담·견적 문의는 <a href="#apply">문의 폼</a>이나 이메일로만 받고, 평일 저녁과 주말에 답변드려요. 전화 상담은 없어요.</p></details>
     <details><summary>우리 프로그램도 연결되나요?<span class="pm" aria-hidden="true"></span></summary>
-      <p class="a">사용 중인 프로그램과 환경을 확인한 뒤, 연결이 가능한지와 방식을 안내해 드립니다.</p></details>
+      <p class="a">사용 중인 프로그램과 환경을 확인한 뒤, 연결이 가능한지와 방식을 알려드려요.</p></details>
     <details><summary>데이터·비밀번호는 안전한가요?<span class="pm" aria-hidden="true"></span></summary>
-      <p class="a">프로그램은 회사 PC나 회사 계정 안에서 동작하고, 작업에 필요한 권한만 사용합니다. 어떤 데이터에 접근하는지는 제작 전에 먼저 설명드립니다.</p></details>
+      <p class="a">프로그램은 회사 PC나 회사 계정 안에서 동작하고, 작업에 필요한 권한만 사용해요. 어떤 데이터에 접근하는지는 제작 전에 먼저 설명드려요.</p></details>
   </div>
 </div></section>
 
 <!-- 8. 회사 소개 -->
-<section class="tight" id="about"><div class="wrap">
+<section class="alt tight" id="about"><div class="wrap">
   <div class="about">
     <h2>LazyHand 소개.</h2>
-    <p>LazyHand는 LA 의류 도매 현장에서 매일 쓰려고 직접 만든 자동화에서 시작했습니다. 주문, 재고, 배송, 정산처럼 날마다 반복되는 일을 하나씩 프로그램으로 바꿔 왔습니다.</p>
-    <p>만드는 사람이 직접 운영하며 검증한 방식만, 각 회사의 업무에 맞춰 만들어 드립니다.</p>
+    <p>LazyHand는 LA에서 의류 도매 회사를 운영하는 사람이 만들어요. 주문, 재고, 배송, 정산처럼 날마다 반복되는 일을 직접 하다가, 하나씩 프로그램으로 바꿔 왔어요.</p>
+    <p>그렇게 만든 프로그램은 지금도 매일 저희 회사에서 돌아가고 있어요. 위 사례 속 A사가 바로 그 회사예요.</p>
+    <p>직접 써 보고 효과를 본 방식 그대로, 다른 회사의 업무에 맞춰 만들어 드려요.</p>
   </div>
 </div></section>
 
 <!-- 9. Final CTA -->
 <section class="inv contact" id="contact"><div class="wrap center">
   <h2>반복 업무, 이제 맡기세요.</h2>
-  <p class="lead">어떤 일이 자동으로 될지 무료로 알려드립니다.</p>
-  <ul class="chips"><li>전화 없음</li><li>온라인으로만</li><li>평일 저녁·주말 답변</li></ul>
+  <p class="lead">어떤 일이 자동으로 될지 무료로 알려드려요.</p>
+  <ul class="chips"><li>상담은 온라인으로만</li><li>평일 저녁·주말 답변</li><li>납품 후 오류 신고 24시간 접수</li></ul>
   <a class="btn btn-lg" href="#apply">무료 상담 신청</a>
 </div></section>
 
 <!-- 10. Apply form -->
 <section class="apply" id="apply"><div class="wrap narrow">
   <h2>무료 상담 신청.</h2>
-  <p class="lead">1분이면 됩니다. 확인 후 이메일로 답변드립니다.</p>
+  <p class="lead">1분이면 돼요. 확인하고 이메일로 답변드릴게요.</p>
   <form id="af" novalidate>
     <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="frow">
@@ -717,10 +747,10 @@ footer a{color:var(--muted)}
       </div>
     </fieldset>
     <label><span>지금 쓰시는 프로그램</span><input name="Software used" placeholder="예) 엑셀, QuickBooks, Shopify, UPS"></label>
-    <label><span>매일 · 매주 반복하는 일</span><textarea name="Repetitive work" placeholder="예) 매일 아침 주문을 엑셀에서 프로그램으로 옮겨 적는데 2시간 걸립니다"></textarea></label>
+    <label><span>매일 · 매주 반복하는 일</span><textarea name="Repetitive work" placeholder="예) 매일 아침 주문을 엑셀에서 프로그램으로 옮겨 적는데 2시간 걸려요"></textarea></label>
     <button class="btn btn-lg" id="a-btn" type="submit">무료 상담 신청하기</button>
     <p class="amsg" id="a-msg" role="status"></p>
-    <p class="anote">전화는 드리지 않습니다. 평일 저녁·주말에 이메일로 답변드립니다.</p>
+    <p class="anote">전화 상담은 없어요. 상담·견적 문의는 평일 저녁·주말에 이메일로 답변드려요.<br>납품 후 오류 신고는 이메일로 24시간 접수해요.</p>
   </form>
 </div></section>
 
@@ -728,7 +758,7 @@ footer a{color:var(--muted)}
 
 <footer><div class="wrap">
   <span>© LazyHand · <a href="https://lazyhandla.github.io/">lazyhandla.github.io</a></span>
-  <span>라코 자동 올리기 프로그램은 라디오코리아와 관련 없는 독립 프로그램입니다.</span>
+  <span>라코 자동 올리기 프로그램은 라디오코리아와 관련 없는 독립 프로그램이에요.</span>
 </div></footer>
 
 <script>
@@ -805,7 +835,7 @@ footer a{color:var(--muted)}
     var list = sorted();
     document.getElementById('picked').textContent = list.length
       ? (full ? '최대 5개 선택됨 · ' : '') + list.map(fmt).join(', ')
-      : '원하는 시간을 클릭하세요';
+      : '원하는 시간을 눌러 주세요';
   }
   render();
 
@@ -819,8 +849,27 @@ footer a{color:var(--muted)}
     if (!v('txt').trim()) need.push('내용');
     if (need.length) { m.style.color = 'var(--err)'; m.textContent = need.join(', ') + '을(를) 입력해주세요'; return; }
     m.style.color = 'var(--ok)';
-    m.textContent = '미리보기입니다 · 실제 프로그램은 ' + days + '일마다 ' + sorted().map(fmt).join(', ') + '에 자동으로 올립니다';
+    m.textContent = '미리보기예요 · 실제 프로그램은 ' + days + '일마다 ' + sorted().map(fmt).join(', ') + '에 자동으로 올려요';
   });
+
+  // More cases toggle — keeps the button where it is on screen when collapsing
+  var list = document.getElementById('case-list'), more = document.getElementById('more-btn');
+  function setOpen(open) {
+    list.classList.toggle('open', open);
+    more.setAttribute('aria-expanded', String(open));
+    more.querySelector('.more-label').textContent = open ? '사례 접기' : '사례 더 보기';
+  }
+  more.addEventListener('click', function () {
+    var open = more.getAttribute('aria-expanded') !== 'true';
+    var before = more.getBoundingClientRect().top;
+    setOpen(open);
+    if (!open) window.scrollBy(0, more.getBoundingClientRect().top - before);
+  });
+  function openForHash() {
+    var t = location.hash && document.getElementById(location.hash.slice(1));
+    if (t && list.contains(t) && t.closest('.extra')) { setOpen(true); t.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openForHash); openForHash();
 
   // Reveal on scroll
   var els = document.querySelectorAll('.rv');
@@ -852,8 +901,8 @@ footer a{color:var(--muted)}
       var r=await fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
       var j=await r.json().catch(function(){return {};});
       if(!r.ok||String(j.success)==='false') throw new Error(j.message||r.status);
-      f.reset(); msg.textContent='신청이 접수되었습니다. 이메일로 답변드리겠습니다. 감사합니다!'; msg.className='amsg ok';
-    }catch(err){ msg.textContent='전송에 실패했습니다. '+EMAIL+' 으로 직접 보내주세요.'; msg.className='amsg err'; }
+      f.reset(); msg.textContent='신청이 접수됐어요. 이메일로 답변드릴게요. 감사합니다!'; msg.className='amsg ok';
+    }catch(err){ msg.textContent='전송에 실패했어요. '+EMAIL+' 으로 직접 보내주세요.'; msg.className='amsg err'; }
     finally{ btn.disabled=false; btn.textContent='무료 상담 신청하기'; }
   });
 })();
