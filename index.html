@@ -1,400 +1,862 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LazyHand</title>
-<meta name="description" content="LazyHand automates the work your team repeats every day. Built and used daily by a real LA business. Free consultation.">
-<meta property="og:title" content="LazyHand — Automate the work your team repeats every day">
-<meta property="og:description" content="Invoices, inventory, reports, line sheets, auto-printing and custom automation. Free consultation.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f5eff'/><text x='32' y='44' font-size='34' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'>L</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<title>LazyHand 자동화</title>
+<meta name="description" content="매일 반복하는 일, 이제 자동으로. 주문·재고·엑셀 같은 반복 업무를 회사에 맞는 자동화 프로그램으로 만들어드립니다. 무료 상담, 온라인으로만 진행.">
+<meta property="og:title" content="LazyHand — 매일 반복하는 일, 이제 자동으로.">
+<meta property="og:description" content="회사에 맞는 자동화 프로그램 제작. LA 의류 도매 현장에서 실제 운영 중인 사례. 무료 상담, 온라인으로만 진행.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text x='32' y='54' font-size='62' font-family='Arial' font-weight='900' fill='%230071e3' text-anchor='middle'>L</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
+/* Hallmark · macrostructure: Problem/Solution → Case File · tone: utilitarian-Apple (owner-specified) · anchor hue: blue 250
+ * nav: N1a-thin (3 destinations) · footer: Ft2 inline · enrichment: none (typography + one interactive mock)
+ * pre-emit critique: P4 H4 E4 S5 R4 V3 */
 :root{
-  --bg:#f7f6f2; --card:#ffffff; --ink:#16181d; --muted:#5d6370; --line:#e3e1da;
-  --accent:#1f5eff; --accent-ink:#ffffff; --soft:#eaf0ff; --ok:#137a3f; --err:#c0392b;
+  --bg:#ffffff; --alt:#f5f5f7; --ink:#1d1d1f; --ink2:#333336; --muted:#515154; --faint:#86868b; --line:#d2d2d7; --hair:#e8e8ed;
+  --tile:#ffffff; --accent:#0071e3; --accent-hover:#0077ed; --link:#0066cc; --brand-blue:#0071e3;
+  --inv:#000000; --inv-ink:#f5f5f7; --inv-muted:#a1a1a6; --inv-line:#424245; --inv-link:#2997ff;
+  --ok:#1a7f37; --err:#d70015; --orange:#b64400;
+  --art:#6e6e73; --art-soft:#aeaeb2; --art-paper:#ffffff;
+  --win:#f3f3f3; --win-bar:#ebebeb; --win-field:#ffffff; --win-line:#d6d6d6; --win-ad:#f7f7f9;
+  --logo-tile:#ffffff;
+  --shadow:0 2px 6px rgba(0,0,0,.06),0 24px 60px rgba(0,0,0,.14);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#121317; --card:#1b1d23; --ink:#eef0f4; --muted:#a3a9b6; --line:#2c2f37;
-    --accent:#5b8cff; --accent-ink:#0b0d12; --soft:#1e2740; --ok:#4cc38a; --err:#ff7a6b;
+    --bg:#000000; --alt:#141416; --ink:#f5f5f7; --ink2:#d2d2d7; --muted:#a1a1a6; --faint:#86868b; --line:#424245; --hair:#2c2c2e;
+    --tile:#1d1d1f; --accent:#0071e3; --accent-hover:#0077ed; --link:#2997ff; --brand-blue:#2997ff;
+    --inv:#1d1d1f; --inv-ink:#f5f5f7; --inv-muted:#a1a1a6; --inv-line:#424245; --inv-link:#2997ff;
+    --ok:#30d158; --err:#ff453a; --orange:#ff9f0a;
+    --art:#aeaeb2; --art-soft:#636366; --art-paper:#000000;
+    --win:#202020; --win-bar:#2b2b2b; --win-field:#2d2d2d; --win-line:#3d3d3d; --win-ad:#262628;
+    --logo-tile:#ebebf0;
+    --shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.7);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#121317; --card:#1b1d23; --ink:#eef0f4; --muted:#a3a9b6; --line:#2c2f37;
-  --accent:#5b8cff; --accent-ink:#0b0d12; --soft:#1e2740; --ok:#4cc38a; --err:#ff7a6b;
+  --bg:#000000; --alt:#141416; --ink:#f5f5f7; --ink2:#d2d2d7; --muted:#a1a1a6; --faint:#86868b; --line:#424245; --hair:#2c2c2e;
+  --tile:#1d1d1f; --accent:#0071e3; --accent-hover:#0077ed; --link:#2997ff; --brand-blue:#2997ff;
+  --inv:#1d1d1f; --inv-ink:#f5f5f7; --inv-muted:#a1a1a6; --inv-line:#424245; --inv-link:#2997ff;
+  --ok:#30d158; --err:#ff453a; --orange:#ff9f0a;
+  --art:#aeaeb2; --art-soft:#636366; --art-paper:#000000;
+  --win:#202020; --win-bar:#2b2b2b; --win-field:#2d2d2d; --win-line:#3d3d3d; --win-ad:#262628;
+  --logo-tile:#ebebf0;
+  --shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 60px rgba(0,0,0,.7);
 }
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans KR",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-html[lang="ko"] body{font-family:"Noto Sans KR",Inter,system-ui,sans-serif}
-.wrap{max-width:780px;margin:0 auto;padding:0 16px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
-.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
-.logo i{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-style:normal;font-size:18px}
-.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
-.lang button{width:auto;border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:700;padding:6px 14px;cursor:pointer;border-radius:0}
-.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-header{padding:32px 0 28px}
-.tag{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);background:var(--soft);padding:4px 12px;border-radius:999px;margin-bottom:16px}
-h1{font-size:clamp(28px,6vw,44px);line-height:1.2;font-weight:900;margin:0 0 16px;letter-spacing:-.025em}
-.lead{font-size:18px;color:var(--muted);margin:0;max-width:620px}
-.cta{display:inline-block;margin-top:24px;background:var(--accent);color:var(--accent-ink);font-weight:700;padding:14px 24px;border-radius:12px;text-decoration:none}
-section{padding:24px 0}
-h2{font-size:22px;margin:0 0 16px;letter-spacing:-.01em}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-.item b{display:block;font-size:16px;margin-bottom:4px}
-.item span{color:var(--muted);font-size:14px}
-.item.custom{border-style:dashed;border-color:var(--accent);background:var(--soft)}
-.trust{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
-.trust ul{margin:0;padding-left:20px}
-.trust li{margin:6px 0}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;counter-reset:s}
-.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;counter-increment:s}
-.step::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;margin-bottom:8px}
-.step b{display:block}
-.step span{color:var(--muted);font-size:14px}
-form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
-@media (max-width:560px){form{padding:18px}}
-fieldset{border:0;padding:0;margin:0 0 24px;min-width:0}
-legend{font-weight:700;font-size:16px;margin-bottom:10px;padding:0}
-label.f{display:block;font-size:14px;font-weight:500;margin:12px 0 6px}
-.req{color:var(--err)}
-input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
-textarea{min-height:110px;resize:vertical}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media (max-width:560px){.row{grid-template-columns:1fr;gap:0}}
-.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-@media (max-width:560px){.checks{grid-template-columns:1fr}}
-.checks label{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:15px}
-.checks input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent);flex:none}
-.checks label:has(input:checked){border-color:var(--accent);background:var(--soft)}
-.submit{width:100%;font:inherit;font-size:17px;font-weight:700;background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:16px;cursor:pointer}
-.submit:disabled{opacity:.6;cursor:wait}
-.msg{margin-top:14px;font-weight:500;display:none}
-.msg.ok{display:block;color:var(--ok)}
-.msg.err{display:block;color:var(--err)}
-.hp{position:absolute;left:-9999px}
-footer{padding:32px 0 48px;color:var(--muted);font-size:13px;text-align:center}
-footer a{color:inherit}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);overflow-x:clip;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:18px;line-height:1.55;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+@media (max-width:734px){.wrap{padding:0 16px}}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;height:52px;background:color-mix(in srgb,var(--bg) 80%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--hair)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:100%}
+.brand{font-weight:800;font-size:22px;letter-spacing:-.045em;color:var(--ink)}
+.brand .h{color:var(--brand-blue)}
+.brand:hover{text-decoration:none}
+.nav-links{display:flex;gap:28px;align-items:center;font-size:15px;white-space:nowrap}
+.nav-links a{color:var(--ink2)}
+.nav-links a:hover{color:var(--ink);text-decoration:none}
+.nav-links .nav-cta{background:var(--accent);color:#fff;padding:7px 15px;border-radius:980px;font-weight:600}
+.nav-links .nav-cta:hover{background:var(--accent-hover);color:#fff}
+@media (max-width:734px){.nav-links{gap:16px;font-size:14px}.nav-links .nav-cta{padding:6px 12px}}
+
+/* type */
+section{padding:96px 0}
+@media (max-width:734px){section{padding:64px 0}}
+section.tight{padding:76px 0}
+@media (max-width:734px){section.tight{padding:52px 0}}
+.alt{background:var(--alt)}
+.inv{background:var(--inv);color:var(--inv-ink)}
+.center{text-align:center}
+.eyebrow{display:block;font-size:clamp(16px,1.9vw,20px);font-weight:600;color:var(--muted);margin:0 0 12px;letter-spacing:-.01em;white-space:nowrap}
+.eyebrow.orange{color:var(--orange)}
+h1,h2{margin:0;font-weight:700;letter-spacing:-.035em;line-height:1.12;white-space:nowrap}
+h1{font-size:clamp(25px,6.4vw,68px)}
+h2{font-size:clamp(23px,5.9vw,52px)}
+.lead{font-size:clamp(18px,2.1vw,21px);line-height:1.5;color:var(--ink2);margin:16px auto 0;max-width:660px;font-weight:450;letter-spacing:-.015em}
+.inv .lead{color:var(--inv-muted)}
+.head{margin-bottom:52px}
+@media (max-width:734px){.head{margin-bottom:36px}}
+
+/* buttons */
+.ctas{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:36px}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;font-size:17px;font-weight:600;padding:13px 26px;border-radius:980px;border:1.5px solid var(--accent);font-family:inherit;cursor:pointer;white-space:nowrap;letter-spacing:-.01em;line-height:1.2;transition:background-color .15s cubic-bezier(.2,.7,.2,1)}
+.btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);text-decoration:none}
+.btn:active{transform:translateY(1px)}
+.btn-lg{font-size:18px;padding:17px 34px}
+.btn-ghost{background:transparent;color:var(--link);border-color:var(--link)}
+.btn-ghost:hover{background:color-mix(in srgb,var(--link) 9%,transparent);border-color:var(--link)}
+@media (max-width:734px){.btn-lg{font-size:17px;padding:15px 28px}}
+
+/* hero */
+.hero{padding:104px 0 96px;text-align:center}
+.hero .lead{font-size:clamp(19px,2.4vw,24px);max-width:720px;color:var(--ink2);margin-top:22px}
+.hero-meta{margin:26px 0 0;color:var(--muted);font-size:15px;white-space:nowrap}
+@media (max-width:734px){.hero{padding:64px 0 60px}.hero-meta{font-size:14px}}
+
+/* problem → solution rows */
+.ps{border-top:1px solid var(--line)}
+.ps-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;padding:30px 0;border-bottom:1px solid var(--line);align-items:start}
+.ps-row h3{margin:0;font-size:clamp(20px,2.6vw,27px);font-weight:700;letter-spacing:-.035em;line-height:1.25;white-space:nowrap}
+.ps-row .p-d{margin:8px 0 0;color:var(--muted);font-size:16px;line-height:1.5}
+.ps-sol .lbl{display:block;font-size:14px;font-weight:600;color:var(--link);margin-bottom:6px;white-space:nowrap}
+.ps-sol p{margin:0;font-size:clamp(18px,2vw,20px);font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.45}
+.ps-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;padding:0 0 12px;font-size:14px;font-weight:600;color:var(--muted)}
+@media (max-width:734px){.ps-head{display:none}.ps-row{grid-template-columns:minmax(0,1fr);gap:16px;padding:24px 0}}
+
+/* industries */
+.inds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.ind h3{margin:0 0 6px;font-size:clamp(22px,2.6vw,28px);font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.ind .sub{margin:0 0 18px;color:var(--muted);font-size:16px}
+.ind ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ind li{padding:13px 0;border-bottom:1px solid var(--line);font-size:17px;font-weight:500;color:var(--ink);white-space:nowrap}
+@media (max-width:734px){.inds{grid-template-columns:minmax(0,1fr);gap:32px}.ind ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px}.ind li{font-size:16px;padding:12px 0}}
+
+/* order flow */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:0;padding:0;list-style:none}
+.step{position:relative;padding-top:24px}
+.step::before,.step::after{content:"";position:absolute;left:0;top:0;height:2px;border-radius:2px}
+.step::before{right:0;background:var(--inv-line)}
+.step::after{width:100%;transform:scaleX(0);transform-origin:left;background:var(--accent)}
+.step b{display:block;font-size:clamp(19px,2.2vw,24px);font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.step span{display:block;color:var(--inv-muted);font-size:16px;margin-top:6px}
+.flow-note{margin:48px auto 0;max-width:640px;text-align:center;color:var(--inv-muted);font-size:17px;line-height:1.6}
+.flow-note strong{color:var(--inv-ink);font-weight:600}
+.in .step::after{animation:fill 1s cubic-bezier(.4,0,.2,1) forwards}
+.in .step:nth-child(2)::after{animation-delay:.6s}
+.in .step:nth-child(3)::after{animation-delay:1.2s}
+.in .step:nth-child(4)::after{animation-delay:1.8s}
+@keyframes fill{to{transform:scaleX(1)}}
+@media (max-width:734px){.steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 16px}}
+
+/* stock */
+.stock{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px}
+.panel{background:var(--tile);border-radius:24px;padding:40px}
+.wh{display:flex;flex-direction:column;justify-content:space-between}
+.wh .k{font-size:17px;font-weight:600;color:var(--muted)}
+.wh .n{font-size:clamp(76px,11vw,128px);font-weight:700;letter-spacing:-.05em;line-height:1;margin-top:32px;font-variant-numeric:tabular-nums}
+.wh .u{color:var(--muted);font-size:16px;margin-top:10px}
+.ch{list-style:none;margin:0;padding:0}
+.ch li{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:20px 0;border-bottom:1px solid var(--line)}
+.ch li:first-child{padding-top:0}
+.ch li:last-child{border-bottom:0;padding-bottom:0}
+.ch .nm{font-size:17px;font-weight:500;white-space:nowrap}
+.ch .q{display:flex;align-items:baseline;gap:14px;white-space:nowrap}
+.ch .q b{font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.ch .q em{font-style:normal;font-size:14px;font-weight:600;color:var(--ok)}
+.stamp{color:var(--muted);font-size:14px;margin-top:22px}
+@media (max-width:734px){.stock{grid-template-columns:minmax(0,1fr);gap:12px}.panel{padding:28px 22px;border-radius:20px}.wh .n{margin-top:16px}}
+
+/* docs */
+.sub-head{margin:72px 0 36px}
+@media (max-width:734px){.sub-head{margin:52px 0 28px}}
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.doc{background:var(--tile);border-radius:24px;padding:32px 30px 34px;overflow:hidden}
+.doc h3{margin:24px 0 6px;font-size:clamp(20px,2.3vw,23px);font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.doc p{margin:0;color:var(--muted);font-size:16px}
+.art{height:124px;display:flex;align-items:center;justify-content:center;gap:14px}
+.arr{width:30px;height:1.5px;background:var(--art);position:relative}
+.arr::after{content:"";position:absolute;right:0;top:-3.5px;width:7px;height:7px;border-top:1.5px solid var(--art);border-right:1.5px solid var(--art);transform:rotate(45deg)}
+.grid-a,.grid-b{width:70px;height:92px;border:1.5px solid var(--art);border-radius:6px;background:var(--art-paper);
+  background-image:linear-gradient(var(--art-soft) 1px,transparent 1px),linear-gradient(90deg,var(--art-soft) 1px,transparent 1px);background-size:100% 12px,23px 100%}
+.grid-a{transform:rotate(-6deg)}
+.grid-a::before{content:"";display:block;margin:18px 0 0 28px;width:28px;height:5px;background:var(--art);border-radius:2px;box-shadow:-18px 24px 0 var(--art),6px 48px 0 var(--art)}
+.grid-b{position:relative}
+.grid-b::before{content:"";position:absolute;left:0;right:0;top:0;height:13px;background:var(--accent);border-radius:4px 4px 0 0}
+.pages{position:relative;width:78px;height:96px}
+.pages i{position:absolute;width:60px;height:78px;border:1.5px solid var(--art);border-radius:4px;background:var(--art-paper)}
+.pages i:nth-child(1){left:0;top:0}.pages i:nth-child(2){left:8px;top:8px}.pages i:nth-child(3){left:16px;top:16px}
+.pages i:nth-child(3)::before{content:"";position:absolute;left:10px;right:10px;top:14px;height:4px;background:var(--art);border-radius:2px;box-shadow:0 11px 0 var(--art),0 22px 0 var(--art),0 33px 0 var(--art-soft)}
+.onefile{width:68px;height:90px;border:1.5px solid var(--art);border-radius:6px;background:var(--art-paper);position:relative}
+.onefile::before{content:"PDF";position:absolute;left:8px;bottom:7px;font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--err)}
+.onefile::after{content:"";position:absolute;left:10px;right:10px;top:14px;height:4px;background:var(--art);border-radius:2px;box-shadow:0 11px 0 var(--art),0 22px 0 var(--art),0 33px 0 var(--art-soft)}
+.sheet{display:grid;grid-template-columns:repeat(3,32px);gap:8px;padding:12px;border:1.5px solid var(--art);border-radius:6px;background:var(--art-paper)}
+.sheet i{display:block;height:42px;border-radius:3px;background:var(--art-soft);margin-bottom:9px}
+.sheet i::after{content:"";display:block;height:4px;width:70%;margin-top:48px;background:var(--art);border-radius:2px}
+@media (max-width:900px){.docs{grid-template-columns:minmax(0,1fr)}.doc{border-radius:20px;padding:26px 22px 28px}}
+
+/* cases */
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.case{background:var(--alt);border-radius:24px;padding:30px 28px 30px;display:flex;flex-direction:column}
+.case .tag{font-size:15px;font-weight:600;color:var(--muted);white-space:nowrap}
+.case .fig{margin:12px 0 2px;font-size:clamp(40px,4.4vw,52px);font-weight:700;letter-spacing:-.045em;line-height:1.05;white-space:nowrap;font-variant-numeric:tabular-nums}
+.case .fig small{font-size:.42em;font-weight:600;letter-spacing:-.02em;margin-left:4px;color:var(--ink2)}
+.case .cap{margin:0 0 20px;font-size:17px;font-weight:600;color:var(--ink);white-space:nowrap}
+.case dl{margin:0;padding:0}
+.case dt{font-size:13px;font-weight:700;color:var(--muted);margin:14px 0 3px;letter-spacing:0}
+.case dt:first-child{margin-top:0}
+.case dd{margin:0;font-size:16px;line-height:1.5;color:var(--ink2)}
+.case dl{border-top:1px solid var(--line);padding-top:16px}
+.cases-note{margin:28px 0 0;text-align:center;color:var(--muted);font-size:16px}
+@media (max-width:1000px){.cases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.cases{grid-template-columns:minmax(0,1fr);gap:12px}.case{border-radius:20px;padding:26px 22px}}
+
+/* raco case */
+.case.raco{grid-column:1/-1;padding:34px 34px 30px}
+.raco-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.raco h3{margin:6px 0 0;font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-.035em;white-space:nowrap}
+.raco .tag.soon{color:var(--orange)}
+.raco dl.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:22px}
+.raco dl.cols dt{margin-top:0}
+.raco details{margin-top:24px}
+.raco summary{list-style:none;display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:16px;font-weight:600;color:var(--link);border:1.5px solid var(--link);border-radius:980px;padding:10px 20px;white-space:nowrap;user-select:none}
+.raco summary::-webkit-details-marker{display:none}
+.raco summary:hover{background:color-mix(in srgb,var(--link) 9%,transparent)}
+.raco summary .chev{width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.raco details[open] summary .chev{transform:translateY(2px) rotate(-135deg)}
+.raco summary .when-open{display:none}
+.raco details[open] summary .when-open{display:inline}
+.raco details[open] summary .when-closed{display:none}
+.raco-body{padding-top:28px}
+@media (max-width:734px){.case.raco{padding:26px 22px}.raco dl.cols{grid-template-columns:minmax(0,1fr);gap:0}.raco dl.cols dt{margin-top:14px}.raco dl.cols div:first-child dt{margin-top:0}}
+
+/* tool mock */
+.stage{margin:0 auto;max-width:600px}
+.win{background:var(--win);border-radius:9px;box-shadow:var(--shadow);overflow:hidden;font-size:14px;letter-spacing:0;text-align:left;color:var(--ink);
+  font-family:"Segoe UI Variable Text","Segoe UI","Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+.win-bar{display:flex;align-items:center;height:36px;background:var(--win-bar);padding-left:14px;user-select:none}
+.win-ico{width:14px;height:14px;border-radius:3px;background:var(--accent);margin-right:10px;flex:none}
+.win-title{font-size:12px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wc{width:46px;height:36px;display:grid;place-items:center;position:relative;flex:none}
+.wc.min::before{content:"";width:10px;height:1px;background:var(--ink)}
+.wc.max::before{content:"";width:9px;height:9px;border:1px solid var(--ink);border-radius:1px}
+.wc.cls::before,.wc.cls::after{content:"";position:absolute;width:13px;height:1px;background:var(--ink);transform:rotate(45deg)}
+.wc.cls::after{transform:rotate(-45deg)}
+.win-body{padding:24px 26px 22px}
+.f{margin-bottom:20px}
+.f-l{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:600;font-size:13px;margin-bottom:8px;white-space:nowrap}
+.f-l small{font-weight:400;color:var(--muted);font-size:12px}
+.seg{display:inline-grid;grid-template-columns:repeat(3,1fr);background:var(--win-field);border:1px solid var(--win-line);border-radius:6px;padding:2px;width:100%;max-width:260px}
+.opt{font:inherit;font-size:13px;color:var(--ink);background:transparent;border:0;border-radius:4px;padding:7px 0;cursor:pointer}
+.opt[aria-pressed="true"]{background:var(--accent);color:#fff}
+.slots{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.slot{font:inherit;font-size:13px;color:var(--ink);background:var(--win-field);border:1px solid var(--win-line);border-radius:5px;padding:8px 0;cursor:pointer;white-space:nowrap}
+.slot:hover:not(:disabled){border-color:var(--faint)}
+.slot[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.slot:disabled{opacity:.38;cursor:not-allowed}
+.cnt{font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.cnt.full{color:var(--err)}
+.picked{margin-top:8px;font-size:12px;color:var(--muted);min-height:18px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.win input,.win textarea{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--win-field);border:1px solid var(--win-line);border-bottom-color:var(--faint);border-radius:5px;padding:8px 10px}
+.win textarea{min-height:84px;resize:vertical;display:block}
+.win input:focus,.win textarea:focus{outline:0;border-bottom:2px solid var(--accent);padding-bottom:7px}
+.hint{font-size:12px;color:var(--muted);margin-top:6px}
+.save{width:100%;font:inherit;font-size:14px;font-weight:600;color:#fff;background:var(--accent);border:0;border-radius:5px;padding:10px;cursor:pointer}
+.save:hover{background:var(--accent-hover)}
+.msg{margin-top:10px;font-size:13px;text-align:center;min-height:20px}
+.win-ad{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--win-line);background:var(--win-ad);padding:12px 26px;font-size:12px;color:var(--muted)}
+.win-ad b{color:var(--ink);font-weight:600;margin-right:6px}
+.win-ad a{font-size:12px;white-space:nowrap}
+@media (max-width:734px){
+  .win-body{padding:20px 16px 18px}.win-ad{padding:12px 16px;flex-direction:column;align-items:flex-start;gap:4px}
+  .slots{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .two{grid-template-columns:minmax(0,1fr)}
+}
+.facts{display:flex;justify-content:center;margin:36px auto 0;padding:0;list-style:none;max-width:820px}
+.facts li{flex:1;padding:0 18px;text-align:center}
+.facts li + li{border-left:1px solid var(--line)}
+.facts b{display:block;font-size:17px;font-weight:600;white-space:nowrap}
+.facts span{display:block;color:var(--muted);font-size:15px;margin-top:4px}
+.raco-dl{text-align:center;margin-top:32px}
+.raco-note{margin:14px auto 0;max-width:560px;text-align:center;color:var(--muted);font-size:14px;line-height:1.6}
+.btn[disabled]{background:var(--line);border-color:var(--line);color:var(--muted);cursor:default;transform:none}
+@media (max-width:734px){.facts{flex-direction:column;gap:18px}.facts li + li{border-left:0}}
+
+/* logos */
+.logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.logos li{background:var(--logo-tile);border-radius:18px;height:100px;display:flex;align-items:center;justify-content:center;padding:0 14px}
+.logos img{display:block;height:30px;width:auto;max-width:82%;object-fit:contain}
+.logo-note{text-align:center;color:var(--ink2);margin:32px auto 0;font-size:16px;max-width:620px;line-height:1.6}
+@media (max-width:734px){.logos{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.logos li{height:76px;border-radius:14px;padding:0 8px}}
+
+/* process */
+.proc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none;counter-reset:p}
+.proc li{background:var(--alt);border-radius:24px;padding:30px 26px 32px;counter-increment:p}
+.proc li::before{content:counter(p);display:block;font-size:clamp(44px,5vw,60px);font-weight:700;letter-spacing:-.05em;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.proc b{display:block;margin-top:22px;font-size:clamp(20px,2.3vw,24px);font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.proc span{display:block;color:var(--ink2);font-size:16px;margin-top:8px;line-height:1.55}
+.proc-note{margin:28px 0 0;text-align:center;color:var(--muted);font-size:16px}
+@media (max-width:900px){.proc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.proc{grid-template-columns:minmax(0,1fr);gap:10px}
+  .proc li{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:14px;padding:22px 20px;border-radius:20px}
+  .proc li::before{grid-row:span 2;font-size:40px}.proc b{margin-top:2px}}
+
+/* faq */
+.faq{max-width:820px;margin:0 auto;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0;cursor:pointer;font-size:clamp(18px,2vw,21px);font-weight:600;letter-spacing:-.025em;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--link)}
+.pm{position:relative;width:14px;height:14px;flex:none}
+.pm::before,.pm::after{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:currentColor;border-radius:1px;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+.pm::after{transform:rotate(90deg)}
+.faq details[open] .pm::after{transform:rotate(0)}
+.faq .a{margin:-6px 0 0;padding:0 34px 26px 0;color:var(--ink2);font-size:17px;line-height:1.65}
+@media (max-width:734px){.faq summary{padding:20px 0}.faq .a{padding-right:0;font-size:16px}}
+
+/* about */
+.about{max-width:760px;margin:0 auto}
+.about p{margin:18px 0 0;font-size:clamp(18px,2vw,20px);line-height:1.7;color:var(--ink2)}
+.about p:first-of-type{margin-top:22px}
+
+/* contact */
+.contact .chips{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:30px 0 0;padding:0;list-style:none}
+.contact .chips li{white-space:nowrap;font-size:15px;color:var(--inv-ink);border:1px solid var(--inv-line);border-radius:980px;padding:7px 16px}
+.contact .btn{margin-top:36px}
+.contact .lead{color:var(--inv-muted)}
+
+footer{background:var(--alt);color:var(--muted);font-size:13px;line-height:1.6;padding:22px 0 30px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--muted)}
+
+/* reveal */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .in .step::after{animation:none;transform:scaleX(1)}
+  .raco summary .chev,.pm::before,.pm::after{transition:none}
+}
+
+/* apply form */
+.apply{padding:88px 0;background:var(--alt)}
+.apply .narrow{max-width:680px}
+.apply h2{text-align:center;white-space:nowrap}
+.apply .lead{text-align:center;color:var(--muted);margin:10px 0 36px}
+#af{display:grid;gap:18px}
+#af .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#af label{display:grid;gap:8px;font-size:15px;font-weight:600;color:var(--ink)}
+#af label em{color:#e30000;font-style:normal}
+#af input:not([type=checkbox]),#af select,#af textarea{width:100%;font:inherit;font-size:16px;font-weight:400;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+#af textarea{min-height:110px;resize:vertical}
+#af input:focus,#af select:focus,#af textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+#af fieldset{border:0;padding:0;margin:0}
+#af legend{font-size:15px;font-weight:600;margin-bottom:10px;color:var(--ink)}
+#af legend span{font-weight:400;color:var(--muted);font-size:14px;margin-left:6px}
+#af .checks{display:flex;flex-wrap:wrap;gap:8px}
+#af .checks label{display:inline-flex;align-items:center;gap:0;font-weight:500;font-size:15px;cursor:pointer}
+#af .checks input{position:absolute;opacity:0;width:1px;height:1px}
+#af .checks label{border:1px solid var(--line);background:var(--bg);border-radius:980px;padding:9px 16px}
+#af .checks label:has(input:checked){background:var(--accent);border-color:var(--accent);color:#fff}
+#af .checks label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+#af .btn{justify-self:center;margin-top:8px}
+#af .hp{position:absolute;left:-9999px}
+.amsg{text-align:center;margin:0;min-height:24px;font-size:16px}
+.amsg.ok{color:#1d8f3a}.amsg.err{color:#e30000}
+.anote{text-align:center;color:var(--muted);font-size:14px;margin:0}
+@media (max-width:600px){#af .frow{grid-template-columns:1fr}}
 </style>
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<div class="wrap">
-  <nav>
-    <a class="logo" href="#"><i>L</i>LazyHand</a>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-set-lang="en">EN</button>
-      <button type="button" data-set-lang="ko">한국어</button>
+
+<nav class="nav" aria-label="메인"><div class="wrap">
+  <a class="brand" href="./" aria-label="LazyHand">Lazy<span class="h">Hand</span></a>
+  <div class="nav-links">
+    <a href="#cases">사례</a>
+    <a href="#cost">비용</a>
+    <a class="nav-cta" href="#contact">무료 상담</a>
+  </div>
+</div></nav>
+
+<main>
+
+<!-- 1. Hero -->
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">패션 · 물류 · 사무 맞춤 자동화</span>
+  <h1>매일 반복하는 일, 이제 자동으로.</h1>
+  <p class="lead">주문·재고·엑셀 같은 반복 업무를, 회사에 맞는 자동화 프로그램으로 만들어드립니다.</p>
+  <div class="ctas">
+    <a class="btn btn-lg" href="#apply">무료 상담 신청</a>
+    <a class="btn btn-lg btn-ghost" href="#cases">실제 사례 보기</a>
+  </div>
+  <p class="hero-meta">전화 없이 온라인으로만 · 평일 저녁·주말 답변</p>
+</div></header>
+
+<!-- 2. Problem → Solution -->
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <h2>반복 업무, 이렇게 바꿉니다.</h2>
+  </div>
+  <div class="ps-head" aria-hidden="true"><span>지금의 불편</span><span>LazyHand로 바꾸면</span></div>
+  <div class="ps">
+    <div class="ps-row">
+      <div><h3>재고는 있는데 온라인엔 품절.</h3><p class="p-d">창고 숫자와 사이트 숫자가 따로 움직입니다.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>판매 가능한 재고를 매일 웹사이트·도매 사이트에 자동 반영합니다.</p></div>
     </div>
-  </nav>
-
-  <header>
-    <span class="tag" data-i="tag"></span>
-    <h1 data-i="h1"></h1>
-    <p class="lead" data-i="lead"></p>
-    <a class="cta" href="#apply" data-i="cta"></a>
-  </header>
-
-  <section>
-    <h2 data-i="whatH"></h2>
-    <div class="grid">
-      <div class="item"><b data-i="w1t"></b><span data-i="w1d"></span></div>
-      <div class="item"><b data-i="w2t"></b><span data-i="w2d"></span></div>
-      <div class="item"><b data-i="w3t"></b><span data-i="w3d"></span></div>
-      <div class="item"><b data-i="w4t"></b><span data-i="w4d"></span></div>
-      <div class="item"><b data-i="w5t"></b><span data-i="w5d"></span></div>
-      <div class="item"><b data-i="w6t"></b><span data-i="w6d"></span></div>
-      <div class="item"><b data-i="w7t"></b><span data-i="w7d"></span></div>
-      <div class="item"><b data-i="w8t"></b><span data-i="w8d"></span></div>
-      <div class="item"><b data-i="w9t"></b><span data-i="w9d"></span></div>
-      <div class="item custom"><b data-i="w10t"></b><span data-i="w10d"></span></div>
+    <div class="ps-row">
+      <div><h3>월말 커미션 계산에 하루.</h3><p class="p-d">인보이스를 하나씩 엑셀로 옮기고, 입금을 확인합니다.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>배송·입금이 끝난 인보이스 기준으로 매월 자동 계산해 이메일로 보냅니다.</p></div>
     </div>
-  </section>
+    <div class="ps-row">
+      <div><h3>인보이스·라벨 하나씩 출력.</h3><p class="p-d">주문마다 같은 화면을 열고 같은 내용을 붙여넣습니다.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>인보이스·카드 결제·라벨·트래킹을 한 화면에서 이어서 처리합니다.</p></div>
+    </div>
+    <div class="ps-row">
+      <div><h3>배송비가 왜 이렇게 나오지?</h3><p class="p-d">주소 보정비, 무게 차액. 청구서를 한 줄씩 볼 시간이 없습니다.</p></div>
+      <div class="ps-sol"><span class="lbl">LazyHand로 →</span><p>배송 청구서를 자동으로 전수 검사해 새는 비용과 원인을 찾아냅니다.</p></div>
+    </div>
+  </div>
+</div></section>
 
-  <section>
-    <div class="trust">
-      <h2 data-i="trustH"></h2>
-      <ul>
-        <li data-i="t1"></li>
-        <li data-i="t2"></li>
-        <li data-i="t3"></li>
+<!-- 3. 대표 자동화 -->
+<section id="work"><div class="wrap">
+  <div class="head center">
+    <h2>대표 자동화 3가지.</h2>
+    <p class="lead">업종별로 가장 많이 반복되는 일부터 자동으로 바꿉니다.</p>
+  </div>
+  <div class="inds">
+    <div class="ind">
+      <h3>패션 · 의류</h3><p class="sub">웹사이트와 도매 사이트를 한 번에.</p>
+      <ul><li>재고 자동 반영</li><li>웹사이트 가격 검사</li><li>라인싯 · 카탈로그</li><li>커미션 계산</li></ul>
+    </div>
+    <div class="ind">
+      <h3>물류 · 배송</h3><p class="sub">출고부터 청구서 확인까지.</p>
+      <ul><li>배송 라벨 출력</li><li>트래킹 번호 입력</li><li>배송 청구서 검사</li><li>주소 오류 찾기</li></ul>
+    </div>
+    <div class="ind">
+      <h3>사무 · 회계</h3><p class="sub">반복되는 서류와 숫자는 맡기고.</p>
+      <ul><li>인보이스 · 카드 결제</li><li>엑셀 정리 · 보고서</li><li>이메일 자동 발송</li><li>오픈 오더 정리</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- Order flow -->
+<section class="inv tight"><div class="wrap">
+  <div class="head center">
+    <h2>주문부터 라벨까지, 한 화면에서.</h2>
+  </div>
+  <ol class="rv steps" id="steps">
+    <li class="step"><b>주문 불러오기</b><span>웹 · 도매 사이트 주문</span></li>
+    <li class="step"><b>인보이스 생성</b><span>주문 내용 그대로</span></li>
+    <li class="step"><b>카드 결제</b><span>저장된 카드로 결제</span></li>
+    <li class="step"><b>라벨 · 트래킹</b><span>라벨 출력, 번호 자동 입력</span></li>
+  </ol>
+  <p class="flow-note">주문을 고르면 네 단계를 프로그램이 이어서 처리합니다. <strong>주소 오류·결제 실패 같은 예외는 멈추고 사람에게 알립니다.</strong></p>
+</div></section>
+
+<!-- Stock + documents -->
+<section class="alt"><div class="wrap">
+  <div class="head center">
+    <h2>팔 수 있는 재고만, 온라인에.</h2>
+    <p class="lead">판매 가능한 재고를 온라인에 자동 반영. 있는데 품절, 없는데 팔리는 일을 막습니다.</p>
+  </div>
+  <div class="rv stock">
+    <div class="panel wh">
+      <div class="k">창고 (ERP)</div>
+      <div><div class="n">120</div><div class="u">판매 가능 재고</div></div>
+    </div>
+    <div class="panel">
+      <ul class="ch">
+        <li><span class="nm">내 웹사이트</span><span class="q"><b>120</b><em>일치</em></span></li>
+        <li><span class="nm">도매 사이트 A</span><span class="q"><b>120</b><em>일치</em></span></li>
+        <li><span class="nm">도매 사이트 B</span><span class="q"><b>120</b><em>일치</em></span></li>
       </ul>
+      <div class="stamp">화면 예시 · 매일 자동으로 다시 맞춥니다</div>
     </div>
-  </section>
+  </div>
 
-  <section>
-    <h2 data-i="howH"></h2>
-    <div class="steps">
-      <div class="step"><b data-i="s1t"></b><span data-i="s1d"></span></div>
-      <div class="step"><b data-i="s2t"></b><span data-i="s2d"></span></div>
-      <div class="step"><b data-i="s3t"></b><span data-i="s3d"></span></div>
-      <div class="step"><b data-i="s4t"></b><span data-i="s4d"></span></div>
+  <div class="sub-head center">
+    <h2>문서 작업도 알아서.</h2>
+  </div>
+  <div class="docs">
+    <div class="doc"><div class="art" aria-hidden="true"><div class="grid-a"></div><div class="arr"></div><div class="grid-b"></div></div>
+      <h3>엑셀 정리</h3><p>여기저기서 받은 엑셀을 매일 같은 모양의 보고서로.</p></div>
+    <div class="doc"><div class="art" aria-hidden="true"><div class="pages"><i></i><i></i><i></i></div><div class="arr"></div><div class="onefile"></div></div>
+      <h3>PDF 자동 작성</h3><p>여러 장의 서류를 한 파일로 묶어 자동으로 완성.</p></div>
+    <div class="doc"><div class="art" aria-hidden="true"><div class="sheet"><i></i><i></i><i></i></div></div>
+      <h3>라인싯 제작</h3><p>상품 사진과 가격으로 손님에게 보낼 카탈로그를.</p></div>
+  </div>
+</div></section>
+
+<!-- 4. 실제 제작 사례 -->
+<section id="cases"><div class="wrap">
+  <div class="head center">
+    <h2>실제 제작 사례.</h2>
+    <p class="lead">모든 사례는 LA 의류 도매 A사에서 실제 운영 중인 자동화입니다.</p>
+  </div>
+
+  <div class="cases">
+    <article class="case">
+      <span class="tag">배송 청구서 감사</span>
+      <div class="fig">$1,485<small>/년</small></div>
+      <p class="cap">새는 배송비 발견</p>
+      <dl>
+        <dt>기존 불편</dt><dd>UPS 청구서를 한 줄씩 확인할 시간이 없었습니다.</dd>
+        <dt>만든 기능</dt><dd>청구서를 자동으로 전수 검사해 무게 과소신고 정정·검사 수수료·주소 보정비를 분류합니다.</dd>
+        <dt>결과</dt><dd>연 약 $1,485의 새는 비용 발견(주소 보정비만 연 $866). 원인인 잘못 저장된 거래처 주소까지 찾았습니다.</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <span class="tag">웹사이트 도매가 검사</span>
+      <div class="fig">149<small>건</small></div>
+      <p class="cap">잘못된 가격 발견 · 수정</p>
+      <dl>
+        <dt>기존 불편</dt><dd>상품이 많아 웹사이트 가격이 ERP와 맞는지 확인할 수 없었습니다.</dd>
+        <dt>만든 기능</dt><dd>상품 2,220개의 가격을 ERP와 자동으로 대조합니다.</dd>
+        <dt>결과</dt><dd>잘못된 가격 149건을 찾아 수정, 수정 과정 오류 0건.</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <span class="tag">재고 자동 반영</span>
+      <div class="fig">3<small>채널 · 매일</small></div>
+      <p class="cap">판매 가능 재고 자동 반영</p>
+      <dl>
+        <dt>기존 불편</dt><dd>재고가 있는데 품절로 뜨거나, 없는데 팔리는 일이 생겼습니다.</dd>
+        <dt>만든 기능</dt><dd>매일 ERP의 판매 가능 재고를 웹사이트와 도매 사이트 2곳에 반영합니다.</dd>
+        <dt>결과</dt><dd>세 곳의 재고가 매일 ERP 기준으로 다시 맞춰집니다.</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <span class="tag">주문 처리 앱</span>
+      <div class="fig">4단계<small>한 화면</small></div>
+      <p class="cap">주문부터 트래킹까지</p>
+      <dl>
+        <dt>기존 불편</dt><dd>주문마다 여러 프로그램을 오가며 같은 내용을 입력했습니다.</dd>
+        <dt>만든 기능</dt><dd>인보이스 생성, 카드 결제, 배송 라벨 출력, 트래킹 입력을 한 화면에서 이어서 처리합니다.</dd>
+        <dt>결과</dt><dd>주소 오류·결제 실패 같은 예외만 사람이 확인합니다.</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <span class="tag">월 커미션 계산</span>
+      <div class="fig">매월 1일</div>
+      <p class="cap">커미션 자동 계산 · 발송</p>
+      <dl>
+        <dt>기존 불편</dt><dd>인보이스를 하나씩 엑셀로 옮겨 커미션을 계산했습니다.</dd>
+        <dt>만든 기능</dt><dd>배송·입금이 끝난 인보이스 기준으로 영업 담당 커미션을 계산해 이메일로 보냅니다.</dd>
+        <dt>결과</dt><dd>사람이 빠뜨린 인보이스까지 잡아냅니다.</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <span class="tag">오픈 오더 정리</span>
+      <div class="fig">453<small>라인</small></div>
+      <p class="cap">죽은 주문 라인 정리</p>
+      <dl>
+        <dt>기존 불편</dt><dd>재고도 입고 예정도 없는 주문 라인이 화면에 쌓여 있었습니다.</dd>
+        <dt>만든 기능</dt><dd>조건에 맞는 라인을 찾아 한 번에 정리합니다.</dd>
+        <dt>결과</dt><dd>181개 주문의 453개 라인 정리, 오류 0건.</dd>
+      </dl>
+    </article>
+
+    <article class="case raco" id="free">
+      <div class="raco-top">
+        <div>
+          <span class="tag soon">실제 운영 중 · 무료 배포 준비 중</span>
+          <h3>라코 구인광고 자동 올리기</h3>
+        </div>
+      </div>
+      <dl class="cols">
+        <div><dt>기존 불편</dt><dd>라디오코리아 구인광고를 매번 들어가 복사·붙여넣기로 다시 올렸습니다.</dd></div>
+        <div><dt>만든 기능</dt><dd>3·5·7일 주기, 오전 8시~오후 10시 중 하루 최대 5번 선택. 비밀번호는 내 PC에만 암호화 저장, 기간이 지나면 알림 팝업.</dd></div>
+        <div><dt>결과</dt><dd>정한 시간에 알아서 다시 올립니다.</dd></div>
+      </dl>
+      <details id="raco-more">
+        <summary><span class="when-closed">자세히 보기</span><span class="when-open">접기</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="raco-body">
+          <div class="stage">
+            <div class="win" role="group" aria-label="프로그램 미리보기">
+              <div class="win-bar" aria-hidden="true">
+                <span class="win-ico"></span><span class="win-title">라코 구인광고 자동 올리기</span>
+                <span class="wc min"></span><span class="wc max"></span><span class="wc cls"></span>
+              </div>
+              <div class="win-body">
+                <div class="f">
+                  <div class="f-l">다시 올리는 주기</div>
+                  <div class="seg" id="period" role="group" aria-label="주기">
+                    <button class="opt" type="button" aria-pressed="true" data-d="3">3일</button>
+                    <button class="opt" type="button" aria-pressed="false" data-d="5">5일</button>
+                    <button class="opt" type="button" aria-pressed="false" data-d="7">7일</button>
+                  </div>
+                </div>
+                <div class="f">
+                  <div class="f-l">올리는 시간 <small>하루 최대 5개 · <span class="cnt" id="cnt">0 / 5</span></small></div>
+                  <div class="slots" id="slots" role="group" aria-label="올리는 시간"></div>
+                  <div class="picked" id="picked">원하는 시간을 클릭하세요</div>
+                </div>
+                <div class="f">
+                  <div class="two">
+                    <div><div class="f-l">라코 아이디</div><input id="uid" autocomplete="off" placeholder="아이디"></div>
+                    <div><div class="f-l">라코 비밀번호</div><input id="upw" type="password" autocomplete="new-password" placeholder="비밀번호"></div>
+                  </div>
+                  <div class="hint">비밀번호는 이 컴퓨터에만 암호화해서 저장됩니다.</div>
+                </div>
+                <div class="f"><div class="f-l">광고 제목</div><input id="ttl" placeholder="예) 다운타운 봉제공장 미싱사 구합니다"></div>
+                <div class="f"><div class="f-l">광고 내용</div><textarea id="txt" placeholder="근무 시간, 급여, 위치, 연락 방법 등"></textarea></div>
+                <button class="save" type="button" id="go">저장하고 자동 올리기 시작</button>
+                <div class="msg" id="msg" role="status"></div>
+              </div>
+              <div class="win-ad">
+                <span><b>다른 일도 자동으로?</b>온라인 문의만 · 평일 저녁·주말 답변</span>
+                <a href="#contact">LazyHand 문의 ›</a>
+              </div>
+            </div>
+          </div>
+          <ul class="facts">
+            <li><b>정한 주기마다</b><span>3일 · 5일 · 7일 중 선택</span></li>
+            <li><b>기간이 지나면 알림</b><span>팝업으로 다시 알려드립니다</span></li>
+            <li><b>컴퓨터는 켜두세요</b><span>켜져 있어야 올라갑니다</span></li>
+          </ul>
+          <div class="raco-dl"><button class="btn" type="button" disabled>무료 다운로드 · 준비 중</button>
+          <p class="raco-note">A사에서 실제 쓰고 있는 프로그램을 다른 분들도 쓸 수 있게 무료 배포판으로 준비하고 있습니다. Windows 10·11용 · 라디오코리아와 관련 없는 독립 프로그램입니다.</p></div>
+        </div>
+      </details>
+    </article>
+  </div>
+</div></section>
+
+<!-- 5. 연결 프로그램 -->
+<section class="alt tight"><div class="wrap">
+  <div class="head center">
+    <h2>쓰시던 프로그램에 연결.</h2>
+    <p class="lead">새 프로그램을 배울 필요 없이, 지금 쓰는 프로그램에 붙여서 만듭니다.</p>
+  </div>
+  <ul class="logos" id="logos"></ul>
+  <p class="logo-note">로고는 연결해 본 적 있거나 연결 가능한 프로그램입니다. 연동 가능 여부와 방식은 사용 환경 확인 후 안내합니다.</p>
+</div></section>
+
+<!-- 6. 제작 과정 -->
+<section id="process"><div class="wrap">
+  <div class="head center">
+    <h2>제작 과정.</h2>
+    <p class="lead">처음부터 끝까지 온라인으로 진행합니다.</p>
+  </div>
+  <ol class="proc">
+    <li><b>무료 상담</b><span>문의 폼에 반복하는 일을 적어주세요. 자동화가 가능한지, 어떤 방식이 맞는지 무료로 알려드립니다.</span></li>
+    <li><b>견적</b><span>작업 범위와 비용, 일정을 이메일로 안내합니다. 진행이 정해지면 선금 50%로 시작합니다.</span></li>
+    <li><b>제작 · 테스트</b><span>실제 데이터로 돌려보며 회사 업무에 맞는지 함께 확인합니다.</span></li>
+    <li><b>인도 · 지원</b><span>사용법을 안내하고, 인도 후 60~90일 동안 무상으로 수정·지원합니다.</span></li>
+  </ol>
+</div></section>
+
+<!-- 7. 비용 · 지원 FAQ -->
+<section class="alt" id="cost"><div class="wrap">
+  <div class="head center">
+    <h2>비용 · 지원.</h2>
+  </div>
+  <div class="faq">
+    <details><summary>제작비는 어떻게 정하나요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">작업 범위를 보고 견적을 드립니다. 결제는 선금 50%, 완료 후 50%입니다.</p></details>
+    <details><summary>매달 내는 비용이 있나요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">LazyHand 월 사용료는 없습니다. 연결하는 외부 서비스에 자체 요금이 있다면, 그 요금만 해당 서비스에 직접 내시면 됩니다.</p></details>
+    <details><summary>얼마나 걸리나요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">작업 범위에 따라 다릅니다. 견적을 드릴 때 일정을 함께 안내합니다.</p></details>
+    <details><summary>만든 뒤 수정·지원은요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">인도 후 60~90일 동안 무상으로 수정·지원합니다. 그 이후는 별도로 협의합니다.</p></details>
+    <details><summary>전화 상담 되나요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">전화 없이 온라인·이메일로만 진행합니다. 답변은 평일 저녁과 주말에 드립니다.</p></details>
+    <details><summary>우리 프로그램도 연결되나요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">사용 중인 프로그램과 환경을 확인한 뒤, 연결이 가능한지와 방식을 안내해 드립니다.</p></details>
+    <details><summary>데이터·비밀번호는 안전한가요?<span class="pm" aria-hidden="true"></span></summary>
+      <p class="a">프로그램은 회사 PC나 회사 계정 안에서 동작하고, 작업에 필요한 권한만 사용합니다. 어떤 데이터에 접근하는지는 제작 전에 먼저 설명드립니다.</p></details>
+  </div>
+</div></section>
+
+<!-- 8. 회사 소개 -->
+<section class="tight" id="about"><div class="wrap">
+  <div class="about">
+    <h2>LazyHand 소개.</h2>
+    <p>LazyHand는 LA 의류 도매 현장에서 매일 쓰려고 직접 만든 자동화에서 시작했습니다. 주문, 재고, 배송, 정산처럼 날마다 반복되는 일을 하나씩 프로그램으로 바꿔 왔습니다.</p>
+    <p>만드는 사람이 직접 운영하며 검증한 방식만, 각 회사의 업무에 맞춰 만들어 드립니다.</p>
+  </div>
+</div></section>
+
+<!-- 9. Final CTA -->
+<section class="inv contact" id="contact"><div class="wrap center">
+  <h2>반복 업무, 이제 맡기세요.</h2>
+  <p class="lead">어떤 일이 자동으로 될지 무료로 알려드립니다.</p>
+  <ul class="chips"><li>전화 없음</li><li>온라인으로만</li><li>평일 저녁·주말 답변</li></ul>
+  <a class="btn btn-lg" href="#apply">무료 상담 신청</a>
+</div></section>
+
+<!-- 10. Apply form -->
+<section class="apply" id="apply"><div class="wrap narrow">
+  <h2>무료 상담 신청.</h2>
+  <p class="lead">1분이면 됩니다. 확인 후 이메일로 답변드립니다.</p>
+  <form id="af" novalidate>
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="frow">
+      <label><span>회사명 <em>*</em></span><input name="Company" id="a-company" autocomplete="organization" required></label>
+      <label><span>담당자 성함 <em>*</em></span><input name="Name" id="a-name" autocomplete="name" required></label>
     </div>
-  </section>
+    <div class="frow">
+      <label><span>이메일 <em>*</em></span><input name="email" id="a-email" type="email" autocomplete="email" required></label>
+      <label><span>업종</span><select name="Industry"><option value="">선택해 주세요</option><option>의류 · 패션</option><option>물류 · 배송</option><option>사무 · 회계</option><option>기타</option></select></label>
+    </div>
+    <fieldset>
+      <legend>줄이고 싶은 일 <span>여러 개 선택 가능</span></legend>
+      <div class="checks">
+        <label><input type="checkbox" name="Needs" value="재고 자동 반영">재고 자동 반영</label>
+        <label><input type="checkbox" name="Needs" value="주문 · 인보이스">주문 · 인보이스</label>
+        <label><input type="checkbox" name="Needs" value="배송 라벨">배송 라벨</label>
+        <label><input type="checkbox" name="Needs" value="배송비 청구서 검사">배송비 청구서 검사</label>
+        <label><input type="checkbox" name="Needs" value="상품 등록">상품 등록</label>
+        <label><input type="checkbox" name="Needs" value="라인싯 · 카탈로그">라인싯 · 카탈로그</label>
+        <label><input type="checkbox" name="Needs" value="커미션 계산">커미션 계산</label>
+        <label><input type="checkbox" name="Needs" value="엑셀 · 보고서">엑셀 · 보고서</label>
+        <label><input type="checkbox" name="Needs" value="이메일 자동 발송">이메일 자동 발송</label>
+        <label><input type="checkbox" name="Needs" value="기타">기타</label>
+      </div>
+    </fieldset>
+    <label><span>지금 쓰시는 프로그램</span><input name="Software used" placeholder="예) 엑셀, QuickBooks, Shopify, UPS"></label>
+    <label><span>매일 · 매주 반복하는 일</span><textarea name="Repetitive work" placeholder="예) 매일 아침 주문을 엑셀에서 프로그램으로 옮겨 적는데 2시간 걸립니다"></textarea></label>
+    <button class="btn btn-lg" id="a-btn" type="submit">무료 상담 신청하기</button>
+    <p class="amsg" id="a-msg" role="status"></p>
+    <p class="anote">전화는 드리지 않습니다. 평일 저녁·주말에 이메일로 답변드립니다.</p>
+  </form>
+</div></section>
 
-  <section id="apply">
-    <h2 data-i="formH"></h2>
-    <form id="f" novalidate>
-      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+</main>
 
-      <fieldset>
-        <legend data-i="l1"></legend>
-        <div class="row">
-          <div><label class="f" for="company"><span data-i="company"></span> <span class="req">*</span></label><input id="company" name="Company" type="text" autocomplete="organization" required></div>
-          <div><label class="f" for="name"><span data-i="name"></span> <span class="req">*</span></label><input id="name" name="Name" type="text" autocomplete="name" required></div>
-        </div>
-        <div class="row">
-          <div><label class="f" for="phone"><span data-i="phone"></span> <span class="req">*</span></label><input id="phone" name="Phone" type="tel" autocomplete="tel" required></div>
-          <div><label class="f" for="email" data-i="email"></label><input id="email" name="email" type="email" autocomplete="email"></div>
-        </div>
-        <div class="row">
-          <div><label class="f" for="industry" data-i="industry"></label>
-            <select id="industry" name="Industry" data-opts="industryOpts"></select></div>
-          <div><label class="f" for="size" data-i="size"></label>
-            <select id="size" name="Team size" data-opts="sizeOpts"></select></div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend data-i="l2"></legend>
-        <div class="checks" data-checks="needs" data-name="Needs"></div>
-      </fieldset>
-
-      <fieldset>
-        <legend data-i="l3"></legend>
-        <div class="checks" data-checks="tools" data-name="Software used"></div>
-      </fieldset>
-
-      <fieldset>
-        <legend data-i="l4"></legend>
-        <label class="f" for="task" data-i="task"></label>
-        <textarea id="task" name="Repetitive work" data-ph="taskPh"></textarea>
-        <div class="row">
-          <div><label class="f" for="hours" data-i="hours"></label>
-            <select id="hours" name="Hours per day" data-opts="hoursOpts"></select></div>
-          <div><label class="f" for="contact" data-i="contact"></label>
-            <select id="contact" name="Preferred contact" data-opts="contactOpts"></select></div>
-        </div>
-      </fieldset>
-
-      <button class="submit" id="btn" type="submit" data-i="submit"></button>
-      <p id="msg" class="msg" role="status"></p>
-    </form>
-  </section>
-
-  <footer>© LazyHand · <a id="mail" href="#"></a></footer>
-</div>
+<footer><div class="wrap">
+  <span>© LazyHand · <a href="https://lazyhandla.github.io/">lazyhandla.github.io</a></span>
+  <span>라코 자동 올리기 프로그램은 라디오코리아와 관련 없는 독립 프로그램입니다.</span>
+</div></footer>
 
 <script>
-const CONTACT_EMAIL = 'lazyhandla@gmail.com';
-const FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACT_EMAIL;
-
-// Option values are sent in English so every lead email reads the same.
-const NEEDS = [
-  ['Invoices & shipping labels', '인보이스 · 배송라벨 처리', 'Invoices & shipping labels'],
-  ['Inventory sync', '재고 맞추기 (웹사이트 · 판매채널)', 'Inventory sync (website & sales channels)'],
-  ['Order entry', '주문 입력 · 정리', 'Order entry'],
-  ['Excel & PDF work', '엑셀 · PDF 작업', 'Excel & PDF work'],
-  ['Line sheets', '라인싯 · 카탈로그 제작', 'Line sheets & catalogs'],
-  ['Auto printing', '자동 프린트 (인보이스 · 픽티켓 · 라벨)', 'Auto printing (invoices, pick tickets, labels)'],
-  ['Commission & month-end', '커미션 · 월말 계산', 'Commissions & month-end'],
-  ['Shipping bill audit', '배송비 청구서 점검 (UPS · FedEx)', 'Shipping bill audit (UPS / FedEx)'],
-  ['Reports', '엑셀 리포트 자동 작성', 'Automatic reports'],
-  ['Customer emails & texts', '손님 이메일 · 문자 자동 발송', 'Customer emails & texts'],
-  ['Job post reposting', '구인광고 자동 재등록', 'Job post auto-reposting'],
-  ['Product listing', '온라인 상품 등록', 'Online product listing'],
-  ['Custom', '커스텀 작업 (아래에 적어주세요)', 'Custom work (describe below)'],
-];
-const TOOLS = [
-  ['Excel / Google Sheets', 'Excel · 구글시트', 'Excel / Google Sheets'],
-  ['QuickBooks', 'QuickBooks', 'QuickBooks'],
-  ['N41', 'N41', 'N41'],
-  ['Shopify', 'Shopify', 'Shopify'],
-  ['Faire', 'Faire', 'Faire'],
-  ['FashionGo', 'FashionGo', 'FashionGo'],
-  ['UPS / FedEx', 'UPS · FedEx', 'UPS / FedEx'],
-  ['Other', '기타', 'Other'],
-];
-
-const T = {
-  en: {
-    tag: 'Free consultation',
-    h1: 'Your team repeats the same work every day.<br>Let LazyHand do it.',
-    lead: 'We run a real business in Los Angeles. Every automation we offer is one we built for ourselves and use every day. If it doesn’t run for us, we don’t sell it.',
-    cta: 'Get a free consultation →',
-    whatH: 'What we automate',
-    w1t: 'Invoices & shipping labels', w1d: 'Hours of daily processing, done in one click',
-    w2t: 'Inventory sync', w2d: 'Website and sales-channel stock that stays correct on its own',
-    w3t: 'Excel & PDF work', w3d: 'Clean up spreadsheets, merge and generate PDFs automatically',
-    w4t: 'Line sheets', w4d: 'Product photos and prices turned into a ready-to-send line sheet PDF',
-    w5t: 'Auto printing', w5d: 'Invoices, pick tickets and labels print by themselves',
-    w6t: 'Commissions & month-end', w6d: 'Calculated every month and emailed to you',
-    w7t: 'Shipping bill audit', w7d: 'Find UPS / FedEx overcharges and correction fees',
-    w8t: 'Reports & alerts', w8d: 'The numbers you check every day, delivered automatically',
-    w9t: 'Job post reposting', w9d: 'Your hiring ad goes back to the top every hour',
-    w10t: 'Custom work', w10d: 'Something only your business does? Tell us and we’ll build it.',
-    trustH: 'Why LazyHand',
-    t1: 'We are not a software agency. We built these tools <b>because we needed them</b> in our own business.',
-    t2: 'They are <b>running right now</b>, every day, on real orders.',
-    t3: 'Free consultation first. We only promise what we know works.',
-    howH: 'How it works',
-    s1t: 'Free consultation', s1d: 'Tell us what your team repeats',
-    s2t: 'Quote', s2d: 'A clear price and scope, in writing',
-    s3t: 'Build & test', s3d: 'We test on one real case before going live',
-    s4t: 'Hand-off & support', s4d: 'Warranty period included',
-    formH: 'Free consultation request',
-    l1: '1. Contact', company: 'Company', name: 'Your name', phone: 'Phone', email: 'Email',
-    industry: 'Industry', size: 'Team size',
-    industryOpts: [['', 'Select'], ['Apparel wholesale', 'Apparel / fashion wholesale'], ['Apparel retail / e-commerce', 'Apparel retail / online store'], ['Restaurant / food', 'Restaurant / food'], ['Market / distribution', 'Market / distribution'], ['Logistics / trade', 'Logistics / import-export'], ['Office / professional services', 'Office / professional services'], ['Other', 'Other']],
-    sizeOpts: [['', 'Select'], ['1-5', '1–5'], ['6-20', '6–20'], ['21-50', '21–50'], ['50+', '50+']],
-    l2: '2. What would you like to automate? (select all that apply)',
-    l3: '3. Software you use',
-    l4: '4. Tell us more',
-    task: 'What does your team repeat every day or every week?',
-    taskPh: 'e.g. Every morning we copy orders from Excel into our system. It takes 2 hours.',
-    hours: 'Time spent on it per day', contact: 'Best way to reach you',
-    hoursOpts: [['', 'Select'], ['<1h', 'Under 1 hour'], ['1-3h', '1–3 hours'], ['3-5h', '3–5 hours'], ['5h+', '5+ hours']],
-    contactOpts: [['Phone', 'Phone call'], ['Text', 'Text message'], ['Email', 'Email'], ['KakaoTalk', 'KakaoTalk']],
-    submit: 'Request free consultation',
-    sending: 'Sending…',
-    required: 'Please fill in company, name and phone.',
-    ok: 'Thank you! We received your request and will contact you within one business day.',
-    fail: 'Something went wrong. Please email us directly at ' + CONTACT_EMAIL + '.',
-  },
-  ko: {
-    tag: '무료 상담',
-    h1: '직원이 매일 반복하는 일,<br>레이지핸드가 대신합니다.',
-    lead: '저희는 LA에서 실제 회사를 운영하고 있습니다. 직접 필요해서 만들고 매일 쓰고 있는 자동화만 해드립니다. 우리 회사에서 안 돌아가는 건 팔지 않습니다.',
-    cta: '무료 상담 신청하기 →',
-    whatH: '이런 일, 자동으로 됩니다',
-    w1t: '인보이스 · 배송라벨', w1d: '매일 몇 시간 걸리던 처리를 클릭 한 번으로',
-    w2t: '재고 자동 맞춤', w2d: '웹사이트 · 판매채널 재고를 직원이 손으로 안 맞춰도',
-    w3t: '엑셀 · PDF 작업', w3d: '엑셀 정리, PDF 합치기 · 자동 작성',
-    w4t: '라인싯 제작', w4d: '상품 사진과 가격으로 바로 보낼 수 있는 라인싯 PDF',
-    w5t: '자동 프린트', w5d: '인보이스 · 픽티켓 · 라벨이 알아서 출력',
-    w6t: '커미션 · 월말 계산', w6d: '매달 자동 계산, 결과는 이메일로',
-    w7t: '배송비 청구서 점검', w7d: 'UPS · FedEx가 더 걷어간 배송비와 보정 수수료를 찾아냅니다',
-    w8t: '리포트 · 알림', w8d: '매일 보던 숫자를 정리해서 자동으로 보내드립니다',
-    w9t: '구인광고 자동 재등록', w9d: '공고가 매시간 자동으로 다시 올라갑니다',
-    w10t: '커스텀 작업', w10d: '우리 회사만의 일도 말씀해 주세요. 맞춤으로 만들어 드립니다.',
-    trustH: '왜 레이지핸드인가요?',
-    t1: '개발 회사가 아니라, <b>직접 회사를 운영하면서 필요해서</b> 만든 자동화입니다.',
-    t2: '지금 이 순간에도 실제 주문으로 <b>매일 돌아가고</b> 있습니다.',
-    t3: '먼저 무료로 상담하고, 확실히 되는 것만 약속드립니다.',
-    howH: '진행 순서',
-    s1t: '무료 상담', s1d: '반복하는 일을 알려주세요',
-    s2t: '견적', s2d: '가격과 작업 범위를 문서로',
-    s3t: '제작 · 테스트', s3d: '실제 1건으로 먼저 확인',
-    s4t: '인도 · 지원', s4d: '보증 기간 포함',
-    formH: '무료 상담 신청',
-    l1: '1. 연락처', company: '회사명', name: '담당자 성함', phone: '전화번호', email: '이메일',
-    industry: '업종', size: '직원 수',
-    industryOpts: [['', '선택해 주세요'], ['Apparel wholesale', '의류 · 패션 도매'], ['Apparel retail / e-commerce', '의류 · 패션 소매 / 온라인몰'], ['Restaurant / food', '식당 · 식품'], ['Market / distribution', '마켓 · 유통'], ['Logistics / trade', '물류 · 무역'], ['Office / professional services', '사무실 · 전문서비스'], ['Other', '기타']],
-    sizeOpts: [['', '선택해 주세요'], ['1-5', '1~5명'], ['6-20', '6~20명'], ['21-50', '21~50명'], ['50+', '50명 이상']],
-    l2: '2. 자동화하고 싶은 일 (여러 개 선택 가능)',
-    l3: '3. 지금 사용하는 프로그램',
-    l4: '4. 자세히 알려주세요',
-    task: '매일 · 매주 반복하는 일이 무엇인가요?',
-    taskPh: '예) 매일 아침 주문을 엑셀에서 프로그램으로 옮겨 적는데 2시간 걸립니다',
-    hours: '그 일에 쓰는 시간 (하루 기준)', contact: '편한 연락 방법',
-    hoursOpts: [['', '선택해 주세요'], ['<1h', '1시간 미만'], ['1-3h', '1~3시간'], ['3-5h', '3~5시간'], ['5h+', '5시간 이상']],
-    contactOpts: [['Phone', '전화'], ['Text', '문자'], ['Email', '이메일'], ['KakaoTalk', '카카오톡']],
-    submit: '무료 상담 신청하기',
-    sending: '보내는 중…',
-    required: '회사명, 담당자 성함, 전화번호는 꼭 적어주세요.',
-    ok: '신청이 접수되었습니다. 영업일 1일 안에 연락드리겠습니다. 감사합니다!',
-    fail: '전송에 실패했습니다. ' + CONTACT_EMAIL + ' 으로 직접 연락 부탁드립니다.',
+(function () {
+  // Logo wall — real files only; a missing file removes its cell.
+  var LOGOS = [
+    ['ups','UPS'],['fedex','FedEx'],['usps','USPS'],['dhl','DHL'],
+    ['shopify','Shopify'],['amazon','Amazon'],['ebay','eBay'],['etsy','Etsy'],
+    ['faire','Faire'],['fashiongo','FashionGo'],['n41','N41'],['quickbooks','QuickBooks'],
+    ['excel','Microsoft Excel'],['google-sheets','Google Sheets'],['gmail','Gmail'],['outlook','Outlook'],
+    ['google-drive','Google Drive'],['dropbox','Dropbox'],['slack','Slack'],['twilio','Twilio'],
+    ['stripe','Stripe'],['paypal','PayPal'],['authorize-net','Authorize.net'],['windows','Windows']
+  ];
+  var wall = document.getElementById('logos');
+  function fit(img) {
+    // Optical sizing: equalize visual area so icons and wide wordmarks read alike.
+    var ar = img.naturalWidth / img.naturalHeight || 3;
+    var small = window.matchMedia('(max-width:734px)').matches;
+    var base = small ? 24 : 32;
+    var h = base * Math.pow(3 / ar, 0.5);
+    h = Math.max(base * 0.75, Math.min(base * 1.45, h));
+    img.style.height = Math.round(h) + 'px';
   }
-};
+  LOGOS.forEach(function (l) {
+    var li = document.createElement('li');
+    var img = new Image();
+    img.alt = l[1]; img.title = l[1]; img.loading = 'lazy'; img.decoding = 'async';
+    img.onerror = function () { li.remove(); };
+    img.onload = function () { fit(img); };
+    img.src = 'logos/' + l[0] + '.png';
+    li.appendChild(img);
+    wall.appendChild(li);
+  });
+  var mq = window.matchMedia('(max-width:734px)');
+  (mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () {
+    wall.querySelectorAll('img').forEach(function (i) { if (i.complete && i.naturalWidth) fit(i); });
+  });
 
-let lang = 'en';
-
-function buildChecks(el, list) {
-  const keep = new Set([...el.querySelectorAll('input:checked')].map(i => i.value));
-  const name = el.dataset.name;
-  el.innerHTML = '';
-  for (const [value, ko, en] of list) {
-    const label = document.createElement('label');
-    const input = document.createElement('input');
-    input.type = 'checkbox'; input.name = name; input.value = value; input.checked = keep.has(value);
-    label.append(input, document.createTextNode(lang === 'ko' ? ko : en));
-    el.append(label);
-  }
-}
-
-function buildSelect(el, opts) {
-  const keep = el.value;
-  el.innerHTML = '';
-  for (const [value, text] of opts) {
-    const o = document.createElement('option'); o.value = value; o.textContent = text; el.append(o);
-  }
-  el.value = keep;
-  if (el.selectedIndex < 0) el.selectedIndex = 0;
-}
-
-function setLang(next) {
-  lang = next;
-  const t = T[lang];
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i]').forEach(el => { el.innerHTML = t[el.dataset.i]; });
-  document.querySelectorAll('[data-opts]').forEach(el => buildSelect(el, t[el.dataset.opts]));
-  document.querySelectorAll('[data-ph]').forEach(el => { el.placeholder = t[el.dataset.ph]; });
-  buildChecks(document.querySelector('[data-checks="needs"]'), NEEDS);
-  buildChecks(document.querySelector('[data-checks="tools"]'), TOOLS);
-  document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)));
-  document.getElementById('msg').className = 'msg';
-  try { localStorage.setItem('lh-lang', lang); } catch (e) {}
-}
-
-document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
-
-const mail = document.getElementById('mail');
-mail.textContent = CONTACT_EMAIL; mail.href = 'mailto:' + CONTACT_EMAIL;
-
-let initial = (new URLSearchParams(location.search).get('lang')) || '';
-if (!initial) { try { initial = localStorage.getItem('lh-lang') || ''; } catch (e) {} }
-if (!T[initial]) initial = (navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en';
-setLang(initial);
-
-const f = document.getElementById('f'), btn = document.getElementById('btn'), msg = document.getElementById('msg');
-f.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const t = T[lang];
-  msg.className = 'msg';
-  for (const id of ['company', 'name', 'phone']) {
-    const el = document.getElementById(id);
-    if (!el.value.trim()) { msg.textContent = t.required; msg.className = 'msg err'; el.focus(); return; }
-  }
-  const fd = new FormData(f);
-  if (fd.get('_honey')) return;
-  const data = {};
-  for (const [k, v] of fd.entries()) {
-    if (k === '_honey' || v === '') continue;
-    data[k] = data[k] ? data[k] + ', ' + v : v;
-  }
-  data['Language'] = lang === 'ko' ? 'Korean' : 'English';
-  data._subject = '[LazyHand lead] ' + data['Company'] + ' / ' + data['Name'];
-  data._template = 'table';
-  data._captcha = 'false';
-  btn.disabled = true; btn.textContent = t.sending;
-  try {
-    const r = await fetch(FORM_ENDPOINT, {
-      method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)
+  // Period
+  var days = 3;
+  var opts = document.querySelectorAll('#period .opt');
+  opts.forEach(function (b) {
+    b.addEventListener('click', function () {
+      opts.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      days = +b.dataset.d;
     });
-    const j = await r.json().catch(() => ({}));
-    if (!r.ok || String(j.success) === 'false') throw new Error(j.message || r.status);
-    f.reset();
-    msg.textContent = t.ok; msg.className = 'msg ok';
-  } catch (err) {
-    msg.textContent = t.fail; msg.className = 'msg err';
-  } finally {
-    btn.disabled = false; btn.textContent = t.submit;
+  });
+
+  // Time slots: 8am–10pm, max 5
+  var MAX = 5, picked = new Set();
+  function fmt(h) { return (h < 12 ? '오전 ' : '오후 ') + (h > 12 ? h - 12 : h) + '시'; }
+  var slots = document.getElementById('slots');
+  for (var h = 8; h <= 22; h++) (function (h) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'slot'; b.dataset.h = h; b.setAttribute('aria-pressed', 'false');
+    b.textContent = fmt(h);
+    b.addEventListener('click', function () {
+      if (picked.has(h)) picked.delete(h); else if (picked.size < MAX) picked.add(h);
+      render();
+    });
+    slots.appendChild(b);
+  })(h);
+  function sorted() { return Array.from(picked).sort(function (a, b) { return a - b; }); }
+  function render() {
+    var full = picked.size >= MAX;
+    slots.querySelectorAll('.slot').forEach(function (b) {
+      var on = picked.has(+b.dataset.h);
+      b.setAttribute('aria-pressed', String(on));
+      b.disabled = full && !on;
+    });
+    var cnt = document.getElementById('cnt');
+    cnt.textContent = picked.size + ' / ' + MAX;
+    cnt.classList.toggle('full', full);
+    var list = sorted();
+    document.getElementById('picked').textContent = list.length
+      ? (full ? '최대 5개 선택됨 · ' : '') + list.map(fmt).join(', ')
+      : '원하는 시간을 클릭하세요';
   }
-});
+  render();
+
+  document.getElementById('go').addEventListener('click', function () {
+    var m = document.getElementById('msg'), need = [];
+    var v = function (id) { return document.getElementById(id).value; };
+    if (!picked.size) need.push('시간');
+    if (!v('uid').trim()) need.push('아이디');
+    if (!v('upw')) need.push('비밀번호');
+    if (!v('ttl').trim()) need.push('제목');
+    if (!v('txt').trim()) need.push('내용');
+    if (need.length) { m.style.color = 'var(--err)'; m.textContent = need.join(', ') + '을(를) 입력해주세요'; return; }
+    m.style.color = 'var(--ok)';
+    m.textContent = '미리보기입니다 · 실제 프로그램은 ' + days + '일마다 ' + sorted().map(fmt).join(', ') + '에 자동으로 올립니다';
+  });
+
+  // Reveal on scroll
+  var els = document.querySelectorAll('.rv');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+
+<script>
+(function(){
+  var EMAIL='lazyhandla@gmail.com', f=document.getElementById('af'), btn=document.getElementById('a-btn'), msg=document.getElementById('a-msg');
+  f.addEventListener('submit', async function(e){
+    e.preventDefault();
+    for (var id of ['a-company','a-name','a-email']) {
+      var el=document.getElementById(id);
+      if(!el.value.trim() || (id==='a-email' && !el.checkValidity())){ msg.textContent='회사명, 담당자 성함, 이메일은 꼭 적어주세요.'; msg.className='amsg err'; el.focus(); return; }
+    }
+    var fd=new FormData(f); if(fd.get('_honey')) return;
+    var data={};
+    fd.forEach(function(v,k){ if(k==='_honey'||v==='') return; data[k]=data[k]?data[k]+', '+v:v; });
+    data.Language='Korean'; data.Source='new site';
+    data._subject='[LazyHand lead] '+data.Company+' / '+data.Name;
+    data._template='table'; data._captcha='false';
+    btn.disabled=true; btn.textContent='보내는 중…';
+    try{
+      var r=await fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+      var j=await r.json().catch(function(){return {};});
+      if(!r.ok||String(j.success)==='false') throw new Error(j.message||r.status);
+      f.reset(); msg.textContent='신청이 접수되었습니다. 이메일로 답변드리겠습니다. 감사합니다!'; msg.className='amsg ok';
+    }catch(err){ msg.textContent='전송에 실패했습니다. '+EMAIL+' 으로 직접 보내주세요.'; msg.className='amsg err'; }
+    finally{ btn.disabled=false; btn.textContent='무료 상담 신청하기'; }
+  });
+})();
 </script>
 </body>
 </html>
