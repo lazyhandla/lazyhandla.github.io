@@ -396,6 +396,20 @@ footer a{color:var(--muted)}
 .amsg.ok{color:var(--ok)}.amsg.err{color:var(--err)}
 .anote{text-align:center;color:var(--muted);font-size:14px;margin:0}
 @media (max-width:600px){#af .frow{grid-template-columns:1fr}}
+
+/* pull-quote — why the name is LazyHand */
+.quote{padding:clamp(72px,8vw,144px) 0 clamp(88px,9vw,160px);text-align:center;border-top:1px solid var(--hair)}
+.pull{margin:0 auto;max-width:1040px}
+.pull-mark{display:block;font-size:clamp(56px,6vw,96px);line-height:.6;height:.42em;font-weight:700;color:var(--brand-blue);font-family:Georgia,"Times New Roman",serif;margin:0 0 clamp(18px,2vw,28px)}
+.pull blockquote{margin:0}
+.pull blockquote p{margin:0;font-size:clamp(27px,4.3vw,58px);font-weight:700;line-height:1.16;letter-spacing:-.035em;color:var(--ink);text-wrap:balance;word-break:normal;overflow-wrap:break-word}
+.pull blockquote em{font-style:normal;color:var(--brand-blue)}
+.pull .ko{margin:clamp(20px,2.2vw,30px) auto 0;max-width:760px;font-size:clamp(18px,1.9vw,25px);line-height:1.5;color:var(--ink2);font-weight:500;letter-spacing:-.02em;text-wrap:balance}
+.pull figcaption{margin-top:clamp(18px,2vw,26px);font-size:clamp(14px,1.2vw,16px);color:var(--faint);letter-spacing:-.005em}
+.pull .tie{margin:clamp(36px,4vw,56px) 0 0;font-size:clamp(17px,1.5vw,20px);font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.pull .tie b{font-weight:800;letter-spacing:-.045em}
+.pull .tie b span{color:var(--brand-blue)}
+@media (max-width:734px){.quote{padding:56px 0 64px}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -426,6 +440,17 @@ footer a{color:var(--muted)}
 </div>
   <div class="hero-visual rv"><figure class="illus"><img src="img/illus/hero.webp" width="1600" height="905" alt="왼쪽에는 서류 더미와 엑셀 화면, 울리는 전화 사이에서 지친 사장님, 오른쪽에는 같은 사장님이 커피를 마시며 쉬는 동안 작은 로봇이 인보이스를 정리하고 상자를 포장하는 그림" fetchpriority="high" decoding="async"></figure></div>
 </header>
+
+<!-- 1b. Pull-quote: the name -->
+<section class="quote" aria-label="LazyHand 이름의 뜻"><div class="wrap">
+  <figure class="pull rv">
+    <span class="pull-mark" aria-hidden="true">&ldquo;</span>
+    <blockquote lang="en"><p>I choose a lazy person to do a hard job. Because a lazy person will find <em>an easy way</em> to do it.</p></blockquote>
+    <p class="ko">어려운 일엔 게으른 사람을 고른다. 쉬운 방법을 찾아낼 테니까.</p>
+    <figcaption>— 흔히 빌 게이츠의 말로 알려진 문장</figcaption>
+    <p class="tie">그래서 이름이 <b>Lazy<span>Hand</span></b>예요.</p>
+  </figure>
+</div></section>
 
 <!-- 2. Problem → Solution -->
 <section class="alt"><div class="wrap">
@@ -932,6 +957,25 @@ footer a{color:var(--muted)}
     }catch(err){ msg.textContent='전송에 실패했어요. '+EMAIL+' 으로 직접 보내주세요.'; msg.className='amsg err'; }
     finally{ btn.disabled=false; btn.textContent='무료 상담 신청하기'; }
   });
+})();
+</script>
+<script>
+// Visit count — only for visits that come from a link inside the LazyHand app (?from=...).
+// One request per page load, no cookies, nothing else tracked. See privacy.html §7.
+(function () {
+  try {
+    var from = new URLSearchParams(location.search).get('from');
+    if (!from) return;
+    from = from.replace(/[^\w.\-]/g, '').slice(0, 64);
+    if (!from) return;
+    var ref = '';
+    try { ref = document.referrer ? new URL(document.referrer).origin : ''; } catch (e) {}
+    var data = { from: from, page: location.pathname, ref: ref, lang: navigator.language || '' };
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSeC2dp__niPi4SBt8gASk4DOdCkMRbMtt55EaYfQD6O6tcIxw/formResponse', {
+      method: 'POST', mode: 'no-cors', keepalive: true, credentials: 'omit',
+      body: new URLSearchParams({ 'entry.444619395': 'visit', 'entry.1776526162': JSON.stringify(data) })
+    }).catch(function () {});
+  } catch (e) {}
 })();
 </script>
 </body>
