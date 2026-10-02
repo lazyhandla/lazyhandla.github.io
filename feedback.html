@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LazyHand 피드백</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text x='32' y='54' font-size='62' font-family='Arial' font-weight='900' fill='%230071e3' text-anchor='middle'>L</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--muted:#515154;--line:#d2d2d7;--blue:#0071e3;--ok:#1d8f3a;--err:#e30000}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--muted:#a1a1a6;--line:#424245;--blue:#2997ff;--ok:#30d158;--err:#ff6961}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif;line-height:1.6;word-break:keep-all}
+.wrap{max-width:640px;margin:0 auto;padding:40px 16px 80px}
+.brand{font-weight:800;font-size:21px;letter-spacing:-.045em;color:var(--ink);text-decoration:none}
+.brand span{color:var(--blue)}
+h1{font-size:clamp(28px,6vw,40px);letter-spacing:-.03em;margin:32px 0 8px;line-height:1.25}
+.lead{color:var(--muted);font-size:17px;margin:0 0 24px}
+.go{display:block;text-align:center;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;font-size:17px;padding:16px;border-radius:980px;margin:0 0 32px}
+form{background:var(--card);border-radius:22px;padding:24px;display:grid;gap:22px}
+.q{display:grid;gap:10px}
+.q>span{font-weight:700;font-size:16px}
+.q small{color:var(--muted);font-weight:400}
+.stars{display:flex;gap:8px;flex-wrap:wrap}
+.stars label{flex:1;min-width:52px}
+.stars input{position:absolute;opacity:0}
+.stars span{display:block;text-align:center;border:1px solid var(--line);border-radius:12px;padding:10px 0;font-weight:700;cursor:pointer}
+.stars input:checked+span{background:var(--blue);border-color:var(--blue);color:#fff}
+.stars input:focus-visible+span{outline:2px solid var(--blue);outline-offset:2px}
+textarea,input[type=text]{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+textarea{min-height:90px;resize:vertical}
+button{font:inherit;font-weight:700;font-size:17px;border:0;border-radius:980px;padding:15px;background:var(--blue);color:#fff;cursor:pointer}
+button:disabled{opacity:.5}
+.msg{text-align:center;min-height:24px;margin:0}
+.msg.ok{color:var(--ok)}.msg.err{color:var(--err)}
+</style>
+</head>
+<body><div class="wrap">
+<a class="brand" href="./">Lazy<span>Hand</span></a>
+<h1>사이트 보고 솔직하게 말해주세요.</h1>
+<p class="lead">아래 버튼으로 사이트를 먼저 둘러보고, 다시 이 페이지로 와서 느낀 점을 남겨주세요. 2분이면 돼요. 쓴소리 환영해요.</p>
+<a class="go" href="./" target="_blank" rel="noopener">사이트 둘러보기 →</a>
+
+<form id="fb" novalidate>
+  <div class="q"><span>1. 첫인상은 어땠어요? <small>1 별로 · 5 아주 좋음</small></span>
+    <div class="stars">
+      <label><input type="radio" name="score" value="1"><span>1</span></label>
+      <label><input type="radio" name="score" value="2"><span>2</span></label>
+      <label><input type="radio" name="score" value="3"><span>3</span></label>
+      <label><input type="radio" name="score" value="4"><span>4</span></label>
+      <label><input type="radio" name="score" value="5"><span>5</span></label>
+    </div></div>
+  <label class="q"><span>2. 무슨 회사인지 바로 이해됐나요?</span>
+    <textarea name="understand" placeholder="예) 바로 알겠다 / 처음엔 헷갈렸다, 왜냐하면…"></textarea></label>
+  <label class="q"><span>3. 가격은 어때요? <small>(하루 $1부터, 월 $30 / $80 / $200)</small></span>
+    <textarea name="price" placeholder="예) 싸다 / 적당하다 / 비싸다, 이유는…"></textarea></label>
+  <label class="q"><span>4. 사장님이라면 문의하겠어요? 안 한다면 왜요?</span>
+    <textarea name="would_contact"></textarea></label>
+  <label class="q"><span>5. 아쉽거나 이상한 점, 고쳤으면 하는 것</span>
+    <textarea name="improve"></textarea></label>
+  <label class="q"><span>이름 <small>(선택)</small></span>
+    <input type="text" name="name" autocomplete="name"></label>
+  <button id="send" type="submit">피드백 보내기</button>
+  <p class="msg" id="msg" role="status"></p>
+</form>
+</div>
+<script>
+(function(){
+  var URL='https://docs.google.com/forms/d/e/1FAIpQLSeC2dp__niPi4SBt8gASk4DOdCkMRbMtt55EaYfQD6O6tcIxw/formResponse';
+  var f=document.getElementById('fb'), btn=document.getElementById('send'), msg=document.getElementById('msg');
+  f.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var fd=new FormData(f), d={};
+    fd.forEach(function(v,k){ v=String(v).trim(); if(v) d[k]=v.slice(0,1500); });
+    if(Object.keys(d).length===0 || (Object.keys(d).length===1 && d.name)){ msg.textContent='한 가지라도 적어주세요.'; msg.className='msg err'; return; }
+    btn.disabled=true; btn.textContent='보내는 중…';
+    try{
+      await fetch(URL,{method:'POST',mode:'no-cors',body:new URLSearchParams({'entry.444619395':'feedback','entry.1776526162':JSON.stringify(d)})});
+      f.reset(); msg.textContent='고마워요! 잘 받았어요.'; msg.className='msg ok';
+    }catch(err){ msg.textContent='전송이 안 됐어요. 잠시 후 다시 눌러주세요.'; msg.className='msg err'; }
+    finally{ btn.disabled=false; btn.textContent='피드백 보내기'; }
+  });
+})();
+</script>
+</body>
+</html>
