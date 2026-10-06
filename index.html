@@ -230,9 +230,9 @@ h2{font-size:clamp(23px,5.2vw,60px)}
 .free .shot a{aspect-ratio:auto;border-radius:18px}
 .free .shot img{height:auto}
 .raco details{margin-top:44px;text-align:center}
-.raco summary{list-style:none;display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:16px;font-weight:600;color:var(--link);border:1.5px solid var(--link);border-radius:980px;padding:10px 20px;white-space:nowrap;user-select:none}
+.raco summary{list-style:none;display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:17px;font-weight:700;color:#fff;background:var(--link);border:1.5px solid var(--link);border-radius:980px;padding:13px 26px;white-space:nowrap;user-select:none}
 .raco summary::-webkit-details-marker{display:none}
-.raco summary:hover{background:color-mix(in srgb,var(--link) 9%,transparent)}
+.raco summary:hover{opacity:.9}
 .raco summary .chev{width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s cubic-bezier(.2,.7,.2,1)}
 .raco details[open] summary .chev{transform:translateY(2px) rotate(-135deg)}
 .raco summary .when-open{display:none}
@@ -290,6 +290,9 @@ h2{font-size:clamp(23px,5.2vw,60px)}
 .facts b{display:block;font-size:17px;font-weight:600;white-space:nowrap}
 .facts span{display:block;color:var(--muted);font-size:15px;margin-top:4px}
 .raco-dl{text-align:center;margin-top:32px}
+.raco-dl.top{margin:0 0 48px}
+.btn-xl{font-size:21px;padding:20px 44px;box-shadow:0 6px 20px rgba(0,113,227,.28)}
+@media (max-width:734px){.btn-xl{font-size:18px;padding:17px 30px;white-space:normal}}
 .raco-note{margin:14px auto 0;max-width:560px;text-align:center;color:var(--muted);font-size:14px;line-height:1.6}
 .btn[disabled]{background:var(--line);border-color:var(--line);color:var(--muted);cursor:default;transform:none}
 @media (max-width:734px){.facts{flex-direction:column;gap:18px}.facts li + li{border-left:0}}
@@ -652,9 +655,13 @@ footer a{color:var(--muted)}
     <h2>직접 만들어 쓰는 무료 프로그램.</h2>
     <p class="lead">LA 사장님들을 위해, 저희가 매일 쓰는 프로그램을 나눠요.</p>
   </div>
+  <div class="raco-dl top">
+    <a class="btn btn-xl" href="https://apps.microsoft.com/detail/9MWXMN2DZZZ7" target="_blank" rel="noopener">Microsoft Store에서 무료 다운로드</a>
+    <p class="raco-note">Windows 10·11용 · 완전 무료 · 라디오코리아와 관련 없는 독립 프로그램이에요.</p>
+  </div>
   <div class="free">
     <div class="free-copy">
-      <span class="tag soon">실제 운영 중 · Microsoft Store 심사 중</span>
+      <span class="tag soon">실제 운영 중 · Microsoft Store 무료</span>
       <h3>라코 구인광고 자동 올리기</h3>
       <dl>
         <dt>기존 불편</dt><dd>라디오코리아 구인광고를 매번 들어가 복사·붙여넣기로 다시 올렸어요.</dd>
@@ -710,8 +717,6 @@ footer a{color:var(--muted)}
           <li><b>기간이 지나면 알림</b><span>팝업으로 다시 알려드려요</span></li>
           <li><b>컴퓨터는 켜두세요</b><span>켜져 있어야 올라가요</span></li>
         </ul>
-        <div class="raco-dl"><a class="btn" href="https://apps.microsoft.com/detail/9MWXMN2DZZZ7" target="_blank" rel="noopener">Microsoft Store에서 무료 다운로드</a>
-        <p class="raco-note">A사에서 실제로 쓰고 있는 프로그램을 다른 분들도 무료로 쓰실 수 있게 Microsoft Store에 올렸어요. Windows 10·11용 · 라디오코리아와 관련 없는 독립 프로그램이에요.</p></div>
       </div>
     </details>
 </div></section>
